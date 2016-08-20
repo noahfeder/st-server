@@ -1,0 +1,95 @@
+@font-face {
+  font-family: ben;
+  src: url(../ben.ttf);
+}
+body {
+  background-color:  #000;
+}
+.blurry {
+  margin:  0 auto;
+  font-family: ben;
+  letter-spacing: -8px;
+  text-transform: uppercase;
+  font-size: 100px;
+  color:rgba(0,0,0,0.88);
+  -webkit-text-stroke: 4px transparent;
+  text-align: center;
+  text-shadow: 1px 1px 25px red;
+
+  background-image: linear-gradient(60deg,  #f54c42 0%, #e55524 5% , #f00 18%,  #e55555 50%, #f00 55%, #e55524 95%, #f54c42 100%);
+  background-size: 100% 50%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-filter: blur(1px) saturate(1.2);
+}
+
+.blurry {
+    animation: blur_resolve 2s forwards;
+}
+
+.first, .last {
+  font-size: 1.3em;
+  vertical-align: top;
+}
+.middle {
+  vertical-align: middle;
+}
+.first {
+  margin-right: -25px;
+}
+.last {
+  margin-left: -25px;
+}
+
+.dash {
+  vertical-align: text-top;
+  line-height: 1em;
+  letter-spacing: -2px;
+}
+.dash:first-child {
+  margin-right: -22px;
+}
+.dash:last-child {
+  margin-left: -10px;
+}
+#secondDiv {
+  margin-top: -50px;
+}
+
+#top {
+  margin-bottom: -33px;
+  letter-spacing: 2px;
+}
+
+#secondDiv.squeeze {
+  margin-top: -78px;
+}
+#secondDiv.squeeze .dash {
+  vertical-align: middle
+}
+
+.controls {
+  display: flex;
+  flex-flow:  column nowrap;
+  margin:  0 auto;
+  max-width: 500px;
+}
+
+.controls > * {
+  margin: 5px;
+  max-width: 150px;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes blur_resolve{
+  0% {
+    -webkit-filter: blur(100px) saturate(1.2);
+  }
+
+  100%{
+    -webkit-filter: blur(1px) saturate(1.2);
+  }
+}

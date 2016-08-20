@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>st</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="/js/script.js"></script>
+</head>
+<body>
+  <div class="blurry" id="top">_________</div>
+  <div class="blurry" id="firstDiv">
+      <span class="first">s</span>
+      <span class="middle">trange</span>
+      <span class="last">r</span>
+  </div>
+  <div class="blurry squeeze" id="secondDiv">
+    <span class="dash">&macr;&macr;&macr;</span>
+      <span class="between">things</span>
+    <span class="dash">&macr;&macr;&macr;</span>
+  </div>
+  <div class="controls">
+    <% if @top && @bottom %>
+      <input id="first" type="text" value="<%= @top %>">
+      <input id="second" type="text" value="<%= @bottom %>">
+    <% else %>
+      <input id="first" type="text" value="STRANGER">
+      <input id="second" type="text" value="THINGS">
+    <% end %>
+    <button id="blurbutton">Re-Blur</button>
+  </div>
+</body>
+</html>
