@@ -1,9 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    phantomjs (2.1.1.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    screencap (0.1.4)
+      phantomjs
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -14,6 +17,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  screencap
   sinatra
 
 RUBY VERSION

@@ -10,11 +10,12 @@ window.onload  = function() {
       DOM.secondDiv.classList.remove('squeeze');
     }
   }
-
+  function firstRowLength(DOM) {
+    return DOM.first.offsetWidth + DOM.middle.offsetWidth + DOM.last.offsetWidth;
+  }
   function macronize(DOM) {
-    var first = DOM.first.offsetWidth + DOM.middle.offsetWidth + DOM.last.offsetWidth;
+    var first = firstRowLength(DOM);
     var dashWidth = (first - DOM.between.offsetWidth) / 2;
-    console.log(dashWidth);
     var macrons = Math.floor(dashWidth/31);
     Array.prototype.forEach.bind(DOM.dashes)(function(el){
       el.innerHTML = '';
@@ -27,7 +28,20 @@ window.onload  = function() {
         el.classList.remove('hide');
       }
     })
-  }
+  };
+
+  function underscorer(DOM) {
+    var first = firstRowLength(DOM);
+    var underscores = Math.floor(first/70);
+    if (underscores < 4) {
+      DOM.top.innerHTML = '____';
+    } else {
+      DOM.top.innerHTML = '';
+      for (var i = 0; i < underscores; i++) {
+        DOM.top.innerHTML += '_'
+      }
+    }
+  };
 
   function getDom(text) {
     return {
@@ -74,6 +88,7 @@ window.onload  = function() {
     }
     squeeze(DOM);
     macronize(DOM);
+    underscorer(DOM);
   }
 
   function getValue(e) {
