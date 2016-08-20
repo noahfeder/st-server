@@ -12,11 +12,12 @@ end
 get "/:top/:bottom/print" do
   @top = params[:top]
   @bottom = params[:bottom]
-  f = Screencap::Fetcher.new('/#{@top}/#{@bottom}')
+  f = Screencap::Fetcher.new('http://localhost:9292/#{@top}/#{@bottom}')
   screenshot = f.fetch(
     :output => '/cap.png',
     :div => '.wrapper'
     )
+  screenshot
 end
 get "/:garbage" do
   erb :index

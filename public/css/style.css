@@ -52,6 +52,10 @@ body {
 .dash:last-child {
   margin-left: -10px;
 }
+
+#firstDiv {
+  margin-left:  -12.5px;
+}
 #secondDiv {
   margin-top: -50px;
 }
