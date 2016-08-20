@@ -1,8 +1,7 @@
 require 'sinatra'
 
 get "/" do
-  # erb :index
-  "Hi"
+  erb :index
 end
 get "/:top/:bottom" do
   @top = params[:top]
