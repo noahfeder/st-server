@@ -55,9 +55,18 @@ window.onload  = function() {
     squeeze(DOM);
   }
 
-  // on keyup, unless TAB or SHIFT, grab input ID and text vlaue
+  // check keycodes for valid printable characters (or return/backspace)
+  function isValidKey(key) {
+    return ((key > 47 && key < 58) || //numbers
+          key === 13 || //return
+          (key > 64 && key < 91) || //letters
+          (key > 185 && key < 193) || (key > 218 && key < 223) || //special chars
+          key === 8); //backspace
+  }
+
+  // get text and id on keyup
   function getValue(e) {
-    if (e.keyCode !== 9 && e.keyCode !== 16) {
+    if (isValidKey(e.keyCode)) {
       var text = this.value,
             id = this.id;
       handleText(text,id);
