@@ -62,6 +62,7 @@ window.onload  = function() {
             id = this.id;
       handleText(text,id);
       grab_coordinates();
+      applyAnimations();
     }
   }
 
@@ -71,10 +72,7 @@ window.onload  = function() {
   function reblur() {
   // using bind since a DOM collection is an array-like, not an array
     Array.prototype.forEach.bind(blurred)(function(el) {
-      el.classList.remove('blurry_animate');
-      window.setTimeout(function(){
-        el.classList.add('blurry_animate');
-      },10);
+
     });
   }
 
@@ -131,6 +129,23 @@ window.onload  = function() {
       right_line.setAttribute("width", width);
   }
 
+  function applyAnimations(){
+    var firstLetter = document.querySelector(".first");
+    var lastLetter = document.querySelector(".last");
+    var middleLetters = document.getElementsByClassName('middle');
+    //console.log(middleLetters);
+
+    firstLetter.classList.remove('enter-left');
+    lastLetter.classList.remove('enter-right');
+    window.setTimeout(function(){
+    firstLetter.classList.add('enter-left');
+    lastLetter.classList.add('enter-right');
+    },10);
+
+
+
+  }
+
   function listenToMe() {
     inputs[0].addEventListener('keyup',getValue)
     inputs[1].addEventListener('keyup',getValue)
@@ -144,5 +159,6 @@ window.onload  = function() {
   }
 
   listenToMe();
+  applyAnimations()
 
 }
