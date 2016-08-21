@@ -116,11 +116,19 @@ body {
 }
 
 .enter-left{
+<<<<<<< HEAD
+  animation: enter-left 2s;
+}
+
+.enter-right{
+  animation: enter-right 2s;
+=======
   animation: enter-left 10s;
 }
 
 .enter-right{
   animation: enter-right 10s;
+>>>>>>> a546f14061da593109cccbf6fe587d037d0ef470
 }
 
 @keyframes blur_resolve{
