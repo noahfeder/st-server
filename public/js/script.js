@@ -130,15 +130,11 @@ window.onload  = function() {
   }
 
   function applyAnimations(){
-<<<<<<< HEAD
     window.clearTimeout(timer);
-=======
->>>>>>> a546f14061da593109cccbf6fe587d037d0ef470
     var firstLetter = document.querySelector(".first");
     var lastLetter = document.querySelector(".last");
     var middleLetters = document.getElementsByClassName('middle');
     //console.log(middleLetters);
-<<<<<<< HEAD
     firstLetter.style.position = 'relative';
     lastLetter.style.position = 'relative';
     firstLetter.classList.remove('enter-left');
@@ -152,16 +148,6 @@ window.onload  = function() {
       firstLetter.style.position = 'static';
       lastLetter.style.position = 'static';
     },2010)
-=======
-
-    firstLetter.classList.remove('enter-left');
-    lastLetter.classList.remove('enter-right');
-    window.setTimeout(function(){
-    firstLetter.classList.add('enter-left');
-    lastLetter.classList.add('enter-right');
-    },10);
-
->>>>>>> a546f14061da593109cccbf6fe587d037d0ef470
 
 
   }
