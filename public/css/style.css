@@ -98,7 +98,10 @@ body {
 #secondDiv.squeeze .dash {
   vertical-align: middle
 }
-
+.between {
+  min-height: 133px;
+  min-width: 10px;
+}
 .controls {
   display: flex;
   flex-flow:  column nowrap;
@@ -113,6 +116,10 @@ body {
 
 .hide {
   display: none;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .enter-left{

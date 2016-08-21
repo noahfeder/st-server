@@ -24,6 +24,18 @@ window.onload  = function() {
     'dashes' : document.getElementsByClassName('dash')
     };
   }
+  /**
+  * If the second row is an empty string, need to replace with a filler char
+  */
+  function handleBlank(text, DOM) {
+    if (text === '') {
+      DOM.between.classList.add('invisible');
+      text = 'X'
+    } else {
+      DOM.between.classList.remove('invisible');
+    }
+    return text;
+  }
   /*
   * take text from inputs OR url and add to DOM
   */
@@ -50,6 +62,7 @@ window.onload  = function() {
         DOM.middle.textContent = middleText;
       }
     } else { // secondDiv text, bottom row
+      text = handleBlank(text,DOM); // if blank
       DOM.between.textContent = text;
     }
     squeeze(DOM);
