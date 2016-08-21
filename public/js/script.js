@@ -102,11 +102,11 @@ window.onload  = function() {
     var left_line_width = is_first_div_longer ? (second_rect.left - first_rect.left) : (first_rect.left - second_rect.left);
     var right_line_right = is_first_div_longer ? second_rect.right : first_rect.right;
     var right_line_width = is_first_div_longer ? (first_rect.right - second_rect.right) : (second_rect.right - first_rect.right);
-    var marginOffset = is_first_div_longer ? 25 : 5;
+    var marginOffset = is_first_div_longer ? -30: -45;
 
     resize_top_line(first_rect.left, first_rect.top, first_div_width);
-    resize_left_line(left_line_left, (second_rect.top + marginOffset), left_line_width);
-    resize_right_line((right_line_right + 6), (second_rect.top  + marginOffset), right_line_width);
+    resize_left_line(left_line_left, (first_rect.bottom + marginOffset), left_line_width);
+    resize_right_line((right_line_right + 6), (first_rect.bottom  + marginOffset), right_line_width);
 
   }
 
