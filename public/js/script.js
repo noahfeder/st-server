@@ -1,9 +1,10 @@
 window.onload  = function() {
+  // grabbing global static DOM vars
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
-  var blurred = document.querySelectorAll('#top,#firstDiv,#secondDiv,.svg-container');
+  var blurred = document.querySelectorAll('#firstDiv,#secondDiv,.svg-container');
 
-
+  // move bottom row between top row
   function squeeze(DOM) {
     if (DOM.middle.offsetWidth > DOM.between.offsetWidth) {
       DOM.secondDiv.classList.add('squeeze');
@@ -11,82 +12,50 @@ window.onload  = function() {
       DOM.secondDiv.classList.remove('squeeze');
     }
   }
-  // function firstRowLength(DOM) {
-  //   return DOM.first.offsetWidth + DOM.middle.offsetWidth + DOM.last.offsetWidth;
-  // }
-  // function macronize(DOM) {
-  //   var first = firstRowLength(DOM);
-  //   var dashWidth = (first - DOM.between.offsetWidth) / 2;
-  //   var macrons = Math.floor(dashWidth/31);
-  //   Array.prototype.forEach.bind(DOM.dashes)(function(el){
-  //     el.innerHTML = '';
-  //     if (macrons < 1) {
-  //       el.classList.add('hide');
-  //     } else {
-  //       for (var i = 0; i < macrons; i++) {
-  //         el.innerHTML += '&macr;'
-  //       }
-  //       el.classList.remove('hide');
-  //     }
-  //   })
-  // };
-
-  // function underscorer(DOM) {
-  //   var first = firstRowLength(DOM);
-  //   var underscores = Math.floor(first/70);
-  //   if (underscores < 4) {
-  //     DOM.top.innerHTML = '____';
-  //   } else {
-  //     DOM.top.innerHTML = '';
-  //     for (var i = 0; i < underscores; i++) {
-  //       DOM.top.innerHTML += '_'
-  //     }
-  //   }
-  // };
-
-  function getDom(text) {
+  // grab DOM elements on demand
+  function getDom() {
     return {
     'first' : document.querySelector('.first'),
     'last' : document.querySelector('.last'),
     'middle' : document.querySelector('.middle'),
-    'top' : document.getElementById('top'),
     'between' : document.querySelector('.between'),
     'firstDiv' : document.getElementById('firstDiv'),
     'secondDiv' : document.getElementById('secondDiv'),
     'dashes' : document.getElementsByClassName('dash')
     };
   }
-
+  /*
+  * take text from inputs OR url and add to DOM
+  */
   function handleText(text,id) {
-    text = text.trim();
+    text = text.trim(); // strip whitespace
     var len = text.length,
         DOM = getDom();
-    if (id === 'first') {
-      var middleText = '';
-      if (len < 3) {
+    if (id === 'first') { // firstDiv text, top row
+      if (len < 3) { // for 0, 1, or 2 character strings, don't capitalize
         DOM.first.textContent = '';
         DOM.last.textContent = '';
         DOM.middle.textContent = text;
-      } else {
+      } else { // loop over text string
+        var middleText = '';
         for (var i = 0; i < len; i++) {
-          if (i === 0) {
+          if (i === 0) { //first char
             DOM.first.textContent = text[i]
-          } else if (i === len - 1) {
+          } else if (i === len - 1) { //last char
             DOM.last.textContent = text[i]
-          } else {
+          } else { //other chars
             middleText += text[i]
           }
         }
         DOM.middle.textContent = middleText;
       }
-    } else {
+    } else { // secondDiv text, bottom row
       DOM.between.textContent = text;
     }
     squeeze(DOM);
-    // macronize(DOM);
-    // underscorer(DOM);
   }
 
+  // on keyup, unless TAB or SHIFT, grab input ID and text vlaue
   function getValue(e) {
     if (e.keyCode !== 9 && e.keyCode !== 16) {
       var text = this.value,
@@ -96,6 +65,9 @@ window.onload  = function() {
     }
   }
 
+  /*
+  * Re-blur the text, if you wanna
+  */
   function reblur() {
   // using bind since a DOM collection is an array-like, not an array
     Array.prototype.forEach.bind(blurred)(function(el) {
@@ -149,7 +121,7 @@ window.onload  = function() {
     var left_line = document.querySelector('.left-line');
       left_line.setAttribute("x", left);
       left_line.setAttribute("y", top);
-      // left_line.setAttribute("width", width);
+      left_line.setAttribute("width", width);
   }
 
   function resize_right_line(right, top, width){
