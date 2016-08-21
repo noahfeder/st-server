@@ -1,7 +1,7 @@
 require 'sinatra'
-#require 'dotenv'
+require 'dotenv'
 
-#Dotenv.load
+Dotenv.load
 
 get "/" do
   erb :index
