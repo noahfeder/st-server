@@ -9,19 +9,24 @@
   <script src="/js/script.js"></script>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="blurry" id="top">_________</div>
-    <div class="blurry" id="firstDiv">
+  <svg class="svg-container blurry_animate">
+    <filter id="blurMe" x="0" y="0">
+       <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+    </filter>
+    <rect class="svg-line top-line" style="" x="20%" y="10%" height="8" width="500"></rect>
+    <rect class="svg-line left-line" style="" x="20%" y="50%" height="8" width="100"></rect>
+    <rect class="svg-line right-line" style="" x="60%" y="50%" height="8" width="100"></rect>
+  </svg>
+
+  <div class="words-container">
+    <div class="blurry blurry_animate" id="firstDiv">
         <span class="first">s</span>
         <span class="middle">trange</span>
         <span class="last">r</span>
     </div>
-    <div class="blurry squeeze" id="secondDiv">
-      <span class="dash">&macr;&macr;&macr;</span>
+    <div class="blurry blurry_animate squeeze" id="secondDiv">
         <span class="between">things</span>
-      <span class="dash">&macr;&macr;&macr;</span>
     </div>
-  </div>
   <div class="controls">
     <% if @top && @bottom %>
       <input id="first" type="text" value="<%= @top %>">
@@ -31,6 +36,7 @@
       <input id="second" type="text" value="THINGS">
     <% end %>
     <button id="blurbutton">Re-Blur</button>
+  </div>
   </div>
 </body>
 </html>
