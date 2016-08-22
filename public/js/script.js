@@ -207,7 +207,7 @@ window.onload  = function() {
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'static';
     });
-    },2010)
+    },5010)
   }
 
   function listenToMe() {

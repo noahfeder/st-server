@@ -5,6 +5,7 @@
 body {
   background-color:  #000;
   transform: rotate3d(0, 0, 0, 0deg);
+  -webkit-transform: rotate3d(0, 0, 0, 0deg);
 }
 
 .svg-container{
@@ -143,7 +144,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 500px) {
   @keyframes blur_resolve{
     0% {
       -webkit-filter: blur(100px) saturate(1.2);
