@@ -87,7 +87,7 @@ window.onload  = function() {
             id = this.id;
       handleText(text,id);
       grabCoordinates();
-      applyAnimations();
+      // applyAnimations();
     }
   }
 
@@ -257,6 +257,7 @@ window.onload  = function() {
 
   spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
   spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
-  listenToMe();
+  handleText(inputs[0].value,inputs[0].id)
+  handleText(inputs[1].value,inputs[1].id)
   grabCoordinates();
 }

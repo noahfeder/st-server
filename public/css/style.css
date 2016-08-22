@@ -89,20 +89,12 @@ body {
   margin-left: -3.5vw;
 }
 
-.dash {
-  vertical-align: text-top;
-  line-height: 1em;
-}
-
 #secondDiv {
   margin-top: -5vw;
 }
 
 #secondDiv.squeeze {
   margin-top: -7.7vw;
-}
-#secondDiv.squeeze .dash {
-  vertical-align: middle
 }
 
 .controls {
