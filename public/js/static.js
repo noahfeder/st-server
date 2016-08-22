@@ -91,26 +91,6 @@ window.onload  = function() {
     squeeze(DOM);
   }
 
-  // check keycodes for valid printable characters (or return/backspace)
-  function isValidKey(key) {
-    return ((key > 47 && key < 58) || //numbers
-          key === 13 || //return
-          (key > 64 && key < 91) || //letters
-          (key > 185 && key < 193) || (key > 218 && key < 223) || //special chars
-          key === 8); //backspace
-  }
-
-  // get text and id on keyup
-  function getValue(e) {
-    if (isValidKey(e.keyCode)) {
-      var text = this.value,
-            id = this.id;
-      handleText(text,id);
-      grabCoordinates();
-      // applyAnimations();
-    }
-  }
-
   function spanifyText(text, row){
     var splitText = text.split('');
     var textLength = text.length;
@@ -173,111 +153,9 @@ window.onload  = function() {
 
   }
 
-  function applyAnimations(){
-    window.clearTimeout(letterTimer);
-    var firstLetter = document.querySelector(".first");
-    var lastLetter = document.querySelector(".last");
-    var minorLetters = document.getElementsByClassName('minor_letter');
-    var topLine = document.querySelector('.top-line');
-    var left_line = document.querySelector('.left-line');
-    var right_line = document.querySelector('.right-line');
-    var animations = ['enter-top','enter-bottom','enter-left','enter-right'];
-    var randomAnimation;
-    var chosenAnimation; //To make sure previous animation is not chosen twice.
-
-    var overallAnimationTime = 5010; //Total animation lasts <5000ms
-
-    firstLetter.style.position = 'relative';
-    lastLetter.style.position = 'relative';
-    topLine.style.display = "none"; //Set lines invisible before animation
-    left_line.style.display = "none";
-    right_line.style.display = "none";
-    firstLetter.classList.remove('enter-left-slow');
-    lastLetter.classList.remove('enter-right-slow');
-    topLine.classList.remove('flash-line');
-    left_line.classList.remove('flash-line');
-    right_line.classList.remove('flash-line');
-    Array.prototype.forEach.bind(minorLetters)(function(letter) {
-      letter.style.position = 'relative';
-      letter.style.opacity = '0'; //Make letters invisible before animation is triggered
-      letter.className = "minor_letter";
-    });
-    window.setTimeout(function(){
-      firstLetter.classList.add('enter-left-slow');
-      lastLetter.classList.add('enter-right-slow');
-      Array.prototype.forEach.bind(minorLetters)(function(letter) {
-        //###
-        //Animation start trigger - random value from 0 - 2000 ms
-        //Animation lasts 3000ms when triggered
-        //Overall Animation Time = <5000ms
-        //###
-        var randomStartTime = Math.floor(Math.random() * 2001);
-
-        //###
-        //Random non-repeating animation assignment
-        //###
-        setTimeout(function(){
-          while (chosenAnimation === randomAnimation) {
-            randomAnimation = Math.floor(Math.random() * animations.length);
-          }
-          chosenAnimation = randomAnimation;
-
-          letter.classList.add(animations[randomAnimation]);
-          letter.style.opacity = '1';//Make visible when animations start
-        },randomStartTime)
-    });
-    },10);
-
-    letterTimer = window.setTimeout(function() {
-      firstLetter.style.position = 'static';
-      lastLetter.style.position = 'static';
-      Array.prototype.forEach.bind(minorLetters)(function(letter) {
-      letter.style.position = 'static';
-      setTimeout(function(){
-        topLine.classList.add('flash-line');
-        topLine.style.display = "initial";
-
-      },10)
-      setTimeout(function(){
-        right_line.classList.add('flash-line');
-        left_line.classList.add('flash-line');
-        left_line.style.display = "initial";
-        right_line.style.display = "initial";
-      },750)
-    });
-    },overallAnimationTime)
-  }
-
-  // /**
-  // * Reset animations and blur on button click
-  // */
-  // function reAnimate() {
-  //   window.clearTimeout(blurTimer);
-  //   grabCoordinates();
-  //   applyAnimations();
-  //   var blurred = document.querySelectorAll('#firstDiv,#secondDiv');
-  //   Array.prototype.forEach.bind(blurred)(function(el) {
-  //     el.classList.remove('blurry_animate');
-  //     blurTimer = window.setTimeout(function(el) {
-  //       el.classList.add('blurry_animate');
-  //     }, 10, el)
-  //   });
-  // }
-
-  function listenToMe() {
-    // inputs[0].addEventListener('keyup',getValue)
-    // inputs[1].addEventListener('keyup',getValue)
-    // button.addEventListener('click',reAnimate)
-    // if (inputs[0].value !== "STRANGER") {
-    // handleText(inputs[0].value,inputs[0].id)
-    // handleText(inputs[1].value,inputs[1].id)
-    // }
-    // window.onresize = grabCoordinates;
-  }
-
   spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
   spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
   handleText(inputs[0].value,inputs[0].id)
   handleText(inputs[1].value,inputs[1].id)
-  grabCoordinates();
+  // grabCoordinates();
 }

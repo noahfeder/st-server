@@ -15,6 +15,23 @@
     <img src="/img/line.png" class="left-line png-line">
     <img src="/img/line.png" class="right-line png-line">
   </div>
+  <style>
+    .top-line {
+      width:  <%= @top_line[:width] %>px;
+      left:  <%= @top_line[:left] %>px;
+      top:  <%= @top_line[:top] %>px;
+    }
+    .left-line {
+      width:  <%= @left_line[:width] %>px;
+      left:  <%= @left_line[:left] %>px;
+      top:  <%= @left_line[:top] %>px;
+    }
+    .right-line {
+      width:  <%= @right_line[:width] %>px;
+      left:  <%= @right_line[:left] %>px;
+      top:  <%= @right_line[:top] %>px;
+    }
+  </style>
   <div class="words-container">
     <div class="blurry" id="firstDiv">
         <span class="first">s</span>
