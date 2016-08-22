@@ -2,7 +2,11 @@
   font-family: ben;
   src: url(../ben.ttf);
 }
+
 body {
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
   background-color:  #000;
   transform: rotate3d(0, 0, 0, 0deg);
   -webkit-transform: rotate3d(0, 0, 0, 0deg);

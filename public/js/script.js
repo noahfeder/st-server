@@ -220,11 +220,7 @@ window.onload  = function() {
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'static';
     });
-<<<<<<< HEAD
-    },5010)
-=======
     },overallAnimationTime)
->>>>>>> fec73c1ab916838984093b412c6146fcd066d436
   }
 
   function listenToMe() {
