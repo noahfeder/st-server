@@ -59,11 +59,13 @@ window.onload  = function() {
             middleText += text[i]
           }
         }
-        DOM.middle.textContent = middleText;
+        //DOM.middle.textContent = middleText;
+        spanifyText(middleText, DOM.middle);
       }
     } else { // secondDiv text, bottom row
       text = handleBlank(text,DOM); // if blank
       DOM.between.textContent = text;
+      spanifyText(text, DOM.between);
     }
     squeeze(DOM);
   }
@@ -85,6 +87,19 @@ window.onload  = function() {
       handleText(text,id);
       grab_coordinates();
       applyAnimations();
+    }
+  }
+
+  function spanifyText(text, row){
+    var splitText = text.split('');
+    var textLength = text.length;
+
+    row.textContent=('');
+    for (var i = 0; i < textLength; i++)
+    {
+      var letterSpan = document.createElement('span');
+      letterSpan.textContent = splitText[i];
+      row.appendChild(letterSpan);
     }
   }
 
@@ -186,6 +201,8 @@ window.onload  = function() {
     grab_coordinates();
   }
 
+  spanifyText('trang', document.querySelector('.middle')); //In lieu of spanning them in HTML template
+  spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
   listenToMe();
   applyAnimations()
 
