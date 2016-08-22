@@ -269,8 +269,8 @@ window.onload  = function() {
     // inputs[1].addEventListener('keyup',getValue)
     // button.addEventListener('click',reAnimate)
     // if (inputs[0].value !== "STRANGER") {
-    handleText(inputs[0].value,inputs[0].id)
-    handleText(inputs[1].value,inputs[1].id)
+    // handleText(inputs[0].value,inputs[0].id)
+    // handleText(inputs[1].value,inputs[1].id)
     // }
     // window.onresize = grabCoordinates;
   }
