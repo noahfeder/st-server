@@ -120,6 +120,10 @@ body {
   visibility: hidden;
 }
 
+.flash-line{
+  animation: flash-line 0.9s;
+}
+
 .enter-left-slow{
    animation: enter-left 5s;
 }
@@ -187,6 +191,16 @@ body {
   }
 }
 
+@keyframes flash-line{
+  0% {
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
 @keyframes enter-top{
   0% {
    top: -800px;
@@ -226,4 +240,3 @@ body {
     right: 0px;
   }
 }
-

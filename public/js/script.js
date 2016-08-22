@@ -172,6 +172,9 @@ window.onload  = function() {
     var firstLetter = document.querySelector(".first");
     var lastLetter = document.querySelector(".last");
     var minorLetters = document.getElementsByClassName('minor_letter');
+    var topLine = document.querySelector('.top-line');
+    var left_line = document.querySelector('.left-line');
+    var right_line = document.querySelector('.right-line');
     var animations = ['enter-top','enter-bottom','enter-left','enter-right'];
     var randomAnimation;
     var chosenAnimation; //To make sure previous animation is not chosen twice.
@@ -180,8 +183,14 @@ window.onload  = function() {
 
     firstLetter.style.position = 'relative';
     lastLetter.style.position = 'relative';
+    topLine.style.display = "none"; //Set lines invisible before animation
+    left_line.style.display = "none";
+    right_line.style.display = "none";
     firstLetter.classList.remove('enter-left-slow');
     lastLetter.classList.remove('enter-right-slow');
+    topLine.classList.remove('flash-line');
+    left_line.classList.remove('flash-line');
+    right_line.classList.remove('flash-line');
     Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'relative';
       letter.style.opacity = '0'; //Make letters invisible before animation is triggered
@@ -219,8 +228,21 @@ window.onload  = function() {
       lastLetter.style.position = 'static';
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'static';
+      setTimeout(function(){
+        topLine.classList.add('flash-line');
+        topLine.style.display = "initial";
+
+      },10)
+      setTimeout(function(){
+        right_line.classList.add('flash-line');
+        left_line.classList.add('flash-line');
+        left_line.style.display = "initial";
+        right_line.style.display = "initial";
+      },750)
     });
     },overallAnimationTime)
+
+
   }
 
   function listenToMe() {
