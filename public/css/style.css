@@ -65,7 +65,7 @@ body {
 }
 
 .blurry_animate {
-    animation: blur_resolve 2s forwards;
+    animation: blur_resolve 5s forwards;
 }
 
 .first, .last {
@@ -149,6 +149,14 @@ body {
     -webkit-filter: blur(100px) saturate(1.2);
   }
 
+  90% {
+    -webkit-filter: blur(1px) saturate(1.2);
+  }
+
+  99% {
+    -webkit-filter: blur(10px) saturate(1.2);
+  }
+
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
   }
@@ -158,6 +166,14 @@ body {
   @keyframes blur_resolve{
     0% {
       -webkit-filter: blur(100px) saturate(1.2);
+    }
+
+    90% {
+      -webkit-filter: blur(1px) saturate(1.2);
+    }
+
+    99% {
+      -webkit-filter: blur(10px) saturate(1.2);
     }
 
     100%{
