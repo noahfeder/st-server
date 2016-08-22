@@ -158,16 +158,14 @@ body {
     -webkit-filter: blur(100px) saturate(1.2);
   }
 
-  90% {
-    -webkit-filter: blur(1px) saturate(1.2);
-  }
-
-  99% {
-    -webkit-filter: blur(10px) saturate(1.2);
+  97% {
+    -webkit-filter: blur(10px) saturate(2);
+    text-shadow: 1px 1px 7vw red;
   }
 
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
+    text-shadow: 1px 1px 2vw red;
   }
 }
 
@@ -177,16 +175,14 @@ body {
       -webkit-filter: blur(100px) saturate(1.2);
     }
 
-    90% {
-      -webkit-filter: blur(1px) saturate(1.2);
-    }
-
-    99% {
-      -webkit-filter: blur(10px) saturate(1.2);
+    97% {
+      -webkit-filter: blur(10px) saturate(2);
+      text-shadow: 1px 1px 5vw red;
     }
 
     100%{
       -webkit-filter: blur(0px) saturate(1.2);
+      text-shadow: 1px 1px 2vw red;
     }
   }
 
