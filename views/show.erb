@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>st</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/static.css">
+  <script src="/js/static.js"></script>
+</head>
+<body>
+  <svg class="svg-container">
+    <filter id="blurMe" x="0" y="0">
+       <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+    </filter>
+    <rect class="svg-line top-line" style="" x="20%" y="10%" height="8" width="500" />
+    <rect class="svg-line left-line" style="" x="20%" y="50%" height="8" width="100" />
+    <rect class="svg-line right-line" style="" x="60%" y="50%" height="8" width="100" />
+  </svg>
+
+  <div class="words-container">
+    <div class="blurry" id="firstDiv">
+        <span class="first">s</span>
+        <span class="middle">trange</span>
+        <span class="last">r</span>
+    </div>
+    <div class="blurry squeeze" id="secondDiv">
+        <span class="between">things</span>
+    </div>
+  <div class="controls hide">
+      <input id="first" type="text" value="<%= @top %>">
+      <input id="second" type="text" value="<%= @bottom %>">
+    <button id="blurbutton">Re-Animate</button>
+  </div>
+  </div>
+</body>
+</html>

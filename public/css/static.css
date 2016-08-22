@@ -1,0 +1,34 @@
+.flash-line{
+  animation: none;
+}
+
+.enter-left-slow{
+   animation: none;
+}
+
+.enter-right-slow{
+   animation: none;
+}
+
+.enter-left{
+  animation: none;
+}
+
+.enter-right{
+  animation: none;
+}
+
+.enter-top{
+  animation: none;
+}
+
+.enter-bottom{
+  animation: none;
+}
+
+.blurry_animate {
+    animation: none;
+}
+.last, .first {
+  position: static;
+}
