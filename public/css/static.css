@@ -31,4 +31,50 @@
 }
 .last, .first {
   position: static;
+  font-size: 130px;
+}
+
+.middle.lonely {
+  margin-left: 20px;
+}
+
+.first {
+  margin-right: -26px;
+}
+.last {
+  margin-left: -26px;
+}
+
+#secondDiv {
+  margin-top: -37.5px;
+}
+
+#secondDiv.squeeze {
+  margin-top: -58px;
+}
+
+.svg-line{
+  stroke-width: 4px;
+}
+
+.blurry {
+  position: relative;
+  margin:  0 auto;
+  padding: 0 10px;
+  font-family: ben;
+  letter-spacing: -8px;
+  text-transform: uppercase;
+  font-size: 100px;
+  color:rgba(0,0,0,0.88);
+  -webkit-text-stroke: 4px transparent;
+  text-align: center;
+  text-shadow: 1px 1px 25px red;
+
+  background-image: linear-gradient(60deg,  #f54c42 0%, #FF9791 5% , #f00 18%,  #e55555 50%, #f00 55%, #fe7982 65%, #ff0d00 95%, #f54c42 100%);
+  background-size: 25% 25%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-filter: blur(1px) saturate(1.2);
+  filter: blur(1px) saturate(1.2);
 }
