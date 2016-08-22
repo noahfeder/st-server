@@ -86,7 +86,7 @@ window.onload  = function() {
       var text = this.value,
             id = this.id;
       handleText(text,id);
-      grab_coordinates();
+      grabCoordinates();
       applyAnimations();
     }
   }
