@@ -21,7 +21,6 @@ body {
 }
 
 .svg-line {
-  filter: url("#blurMe");
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: transparent;

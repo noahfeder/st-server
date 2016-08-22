@@ -55,7 +55,6 @@
 
 .svg-line{
   stroke-width: 4px;
-  filter: url("#blurMe");
 }
 
 .blurry {
