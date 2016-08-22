@@ -9,11 +9,17 @@ body {
   border: 0;
   background-color:  #000;
 }
-
+object {
+  width: 100%;
+  display: block;
+  height: auto;
+  position: relative;
+  padding-top: 100%;
+}
 .svg-container{
   width:  100vw;
   height:  100vh;
-  position:  fixed;
+  position:  absolute;
   top: 0;
   left: 0;
   z-index: -1;
@@ -64,7 +70,7 @@ body {
 }
 
 .blurry_animate {
-    animation: blur_resolve 5s forwards;
+    animation: blur_resolve 5s;
 }
 
 .first, .last {
@@ -147,15 +153,18 @@ body {
 @keyframes blur_resolve{
   0% {
     -webkit-filter: blur(100px) saturate(1.2);
+    filter: blur(100px) saturate(1.2);
   }
 
   97% {
     -webkit-filter: blur(5px) saturate(2);
+    filter: blur(5px) saturate(2);
     text-shadow: 1px 1px 7vw red;
   }
 
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
+    filter: blur(1px) saturate(1.2);
     text-shadow: 1px 1px 2vw red;
   }
 }
@@ -164,15 +173,18 @@ body {
   @keyframes blur_resolve{
     0% {
       -webkit-filter: blur(100px) saturate(1.2);
+      filter: blur(100px) saturate(1.2);
     }
 
     97% {
       -webkit-filter: blur(10px) saturate(2);
+      filter: blur(10px) saturate(2);
       text-shadow: 1px 1px 5vw red;
     }
 
     100%{
       -webkit-filter: blur(0px) saturate(1.2);
+      filter: blur(0px) saturate(1.2);
       text-shadow: 1px 1px 2vw red;
     }
   }
