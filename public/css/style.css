@@ -2,7 +2,11 @@
   font-family: ben;
   src: url(../ben.ttf);
 }
+
 body {
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
   background-color:  #000;
 }
 
@@ -61,7 +65,7 @@ body {
 }
 
 .blurry_animate {
-    animation: blur_resolve 2s forwards;
+    animation: blur_resolve 5s forwards;
 }
 
 .first, .last {
@@ -149,13 +153,46 @@ body {
     -webkit-filter: blur(100px) saturate(1.2);
   }
 
+  90% {
+    -webkit-filter: blur(1px) saturate(1.2);
+  }
+
+  99% {
+    -webkit-filter: blur(10px) saturate(1.2);
+  }
+
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
   }
 }
 
+@media only screen and (max-width: 500px) {
+  @keyframes blur_resolve{
+    0% {
+      -webkit-filter: blur(100px) saturate(1.2);
+    }
+
+    90% {
+      -webkit-filter: blur(1px) saturate(1.2);
+    }
+
+    99% {
+      -webkit-filter: blur(10px) saturate(1.2);
+    }
+
+    100%{
+      -webkit-filter: blur(0px) saturate(1.2);
+    }
+  }
+
+  .blurry {
+    -webkit-filter: blur(0px) saturate(1.2);
+    filter: blur(0px) saturate(1.2);
+  }
+}
+
 @keyframes flash-line{
-  0%{
+  0% {
     opacity: 0;
   }
 
@@ -203,4 +240,3 @@ body {
     right: 0px;
   }
 }
-
