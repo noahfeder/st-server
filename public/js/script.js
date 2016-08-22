@@ -98,6 +98,7 @@ window.onload  = function() {
     for (var i = 0; i < textLength; i++)
     {
       var letterSpan = document.createElement('span');
+      letterSpan.classList.add('minor_letter');
       letterSpan.textContent = splitText[i];
       row.appendChild(letterSpan);
     }
@@ -129,10 +130,10 @@ window.onload  = function() {
     //###
     var is_first_div_longer = first_div_width > second_div_width ? true : false;
 
-     //###
-     //If first div's width (text) is longer, lines extend from the ends of the second div
-     //else, the lines extend from the end of the first div
-     //###
+    //###
+    //If first div's width (text) is longer, lines extend from the ends of the second div
+    //else, the lines extend from the end of the first div
+    //###
     var left_line_left = is_first_div_longer ? first_rect.left : second_rect.left;
     var left_line_width = is_first_div_longer ? (second_rect.left - first_rect.left) : (first_rect.left - second_rect.left);
     var right_line_right = is_first_div_longer ? second_rect.right : first_rect.right;
@@ -170,23 +171,43 @@ window.onload  = function() {
     window.clearTimeout(timer);
     var firstLetter = document.querySelector(".first");
     var lastLetter = document.querySelector(".last");
-    var middleLetters = document.getElementsByClassName('middle');
-    //console.log(middleLetters);
+    var minorLetters = document.getElementsByClassName('minor_letter');
+    var animations = ['enter-top','enter-bottom','enter-left','enter-right'];
+    var randomAnimation;
+    var chosenAnimation; //To make sure previous animation is not chosen twice.
+
     firstLetter.style.position = 'relative';
     lastLetter.style.position = 'relative';
     firstLetter.classList.remove('enter-left');
     lastLetter.classList.remove('enter-right');
+    Array.prototype.forEach.bind(minorLetters)(function(letter) {
+      letter.style.position = 'relative';
+      letter.className = "minor_letter";
+    });
     window.setTimeout(function(){
       firstLetter.classList.add('enter-left');
       lastLetter.classList.add('enter-right');
+      Array.prototype.forEach.bind(minorLetters)(function(letter) {
+        //###
+        //Random non-repeating animation assignment
+        //###
+        while (chosenAnimation === randomAnimation)
+        {
+          randomAnimation = Math.floor(Math.random() * animations.length);
+        }
+        chosenAnimation = randomAnimation;
+        letter.classList.add(animations[randomAnimation]);
+        console.log(animations[randomAnimation])
+    });
     },10);
 
     timer = window.setTimeout(function() {
       firstLetter.style.position = 'static';
       lastLetter.style.position = 'static';
+      Array.prototype.forEach.bind(minorLetters)(function(letter) {
+      letter.style.position = 'static';
+    });
     },2010)
-
-
   }
 
   function listenToMe() {
@@ -201,7 +222,7 @@ window.onload  = function() {
     grab_coordinates();
   }
 
-  spanifyText('trang', document.querySelector('.middle')); //In lieu of spanning them in HTML template
+  spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
   spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
   listenToMe();
   applyAnimations()
