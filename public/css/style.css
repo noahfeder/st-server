@@ -118,20 +118,28 @@ body {
   visibility: hidden;
 }
 
+.enter-left-slow{
+   animation: enter-left 5s;
+}
+
+.enter-right-slow{
+   animation: enter-right 5s;
+}
+
 .enter-left{
-  animation: enter-left 2s;
+  animation: enter-left 3s;
 }
 
 .enter-right{
-  animation: enter-right 2s;
+  animation: enter-right 3s;
 }
 
 .enter-top{
-  animation: enter-top 2s;
+  animation: enter-top 3s;
 }
 
 .enter-bottom{
-  animation: enter-bottom 2s;
+  animation: enter-bottom 3s;
 }
 
 @keyframes blur_resolve{

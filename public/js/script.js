@@ -176,28 +176,41 @@ window.onload  = function() {
     var randomAnimation;
     var chosenAnimation; //To make sure previous animation is not chosen twice.
 
+    var overallAnimationTime = 5010; //Total animation lasts <5000ms
+
     firstLetter.style.position = 'relative';
     lastLetter.style.position = 'relative';
-    firstLetter.classList.remove('enter-left');
-    lastLetter.classList.remove('enter-right');
+    firstLetter.classList.remove('enter-left-slow');
+    lastLetter.classList.remove('enter-right-slow');
     Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'relative';
+      letter.style.opacity = '0'; //Make letters invisible before animation is triggered
       letter.className = "minor_letter";
     });
     window.setTimeout(function(){
-      firstLetter.classList.add('enter-left');
-      lastLetter.classList.add('enter-right');
+      firstLetter.classList.add('enter-left-slow');
+      lastLetter.classList.add('enter-right-slow');
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
+        //###
+        //Animation start trigger - random value from 0 - 2000 ms
+        //Animation lasts 3000ms when triggered
+        //Overall Animation Time = <5000ms
+        //###
+        var randomStartTime = Math.floor(Math.random() * 2001);
+
         //###
         //Random non-repeating animation assignment
         //###
+        setTimeout(function(){
         while (chosenAnimation === randomAnimation)
         {
           randomAnimation = Math.floor(Math.random() * animations.length);
         }
         chosenAnimation = randomAnimation;
-        letter.classList.add(animations[randomAnimation]);
-        console.log(animations[randomAnimation])
+
+          letter.classList.add(animations[randomAnimation]);
+          letter.style.opacity = '1';//Make visible when animations start
+        },randomStartTime)
     });
     },10);
 
@@ -207,7 +220,11 @@ window.onload  = function() {
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'static';
     });
+<<<<<<< HEAD
     },5010)
+=======
+    },overallAnimationTime)
+>>>>>>> fec73c1ab916838984093b412c6146fcd066d436
   }
 
   function listenToMe() {
