@@ -20,7 +20,7 @@ body {
   display: inline;
 }
 
-.svg-line{
+.svg-line {
   filter: url("#blurMe");
   stroke-linecap: round;
   stroke-linejoin: round;

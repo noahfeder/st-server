@@ -108,15 +108,13 @@ window.onload  = function() {
   // added param to make DRYer - noah 8/22/16 1AM
   function resizeLine(name,left,top,width) {
     var line = document.querySelector('.'+name+'-line');
-    line.setAttribute("x", left);
-    line.setAttribute("y", top);
+    line.style.left = left + 'px';
+    line.style.top = top + 'px';
     // short lines look weird on the sides, thus:
     if (name !== 'top') {
       width = (width < 20) ? 0 : width;
     }
-    line.setAttribute("width", width);
-    var height = (window.innerWidth <= 550) ? 4 : 8;
-    line.setAttribute("height", height);
+    line.style.width = width + 'px';
   }
 
 

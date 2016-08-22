@@ -55,6 +55,7 @@
 
 .svg-line{
   stroke-width: 4px;
+  filter: url("#blurMe");
 }
 
 .blurry {
@@ -77,4 +78,10 @@
   background-clip: text;
   -webkit-filter: blur(1px) saturate(1.2);
   filter: blur(1px) saturate(1.2);
+}
+
+.png-line {
+  position: absolute;
+  display: block;
+  height: 20px;
 }

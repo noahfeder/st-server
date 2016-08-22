@@ -10,15 +10,11 @@
   <script src="/js/static.js"></script>
 </head>
 <body>
-  <svg class="svg-container">
-    <filter id="blurMe" x="0" y="0">
-       <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
-    </filter>
-    <rect class="svg-line top-line" style="" x="20%" y="10%" height="8" width="500" />
-    <rect class="svg-line left-line" style="" x="20%" y="50%" height="8" width="100" />
-    <rect class="svg-line right-line" style="" x="60%" y="50%" height="8" width="100" />
-  </svg>
-
+  <div class="svg-container">
+    <img src="/img/line.png" class="top-line png-line">
+    <img src="/img/line.png" class="left-line png-line">
+    <img src="/img/line.png" class="right-line png-line">
+  </div>
   <div class="words-container">
     <div class="blurry" id="firstDiv">
         <span class="first">s</span>
