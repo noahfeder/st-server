@@ -124,6 +124,14 @@ body {
   animation: enter-right 2s;
 }
 
+.enter-top{
+  animation: enter-top 2s;
+}
+
+.enter-bottom{
+  animation: enter-bottom 2s;
+}
+
 @keyframes blur_resolve{
   0% {
     -webkit-filter: blur(100px) saturate(1.2);
