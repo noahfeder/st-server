@@ -121,8 +121,8 @@ window.onload  = function() {
     var second_div = document.querySelector('#secondDiv');
     var first_rect = first_div.getBoundingClientRect();
     var second_rect = second_div.getBoundingClientRect();
-    var first_div_width = (first_rect.right - first_rect.left)
-    var second_div_width = (second_rect.right - second_rect.left)
+    var first_div_width = (first_rect.right - first_rect.left);
+    var second_div_width = (second_rect.right - second_rect.left);
     //###
     //Check if first div is longer than second div
     //If so, then we'll style the left and right lines differently
