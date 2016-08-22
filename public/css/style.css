@@ -116,10 +116,6 @@ body {
   visibility: hidden;
 }
 
-.flash-line{
-  animation: flash-line 0.9s;
-}
-
 .enter-left-slow{
    animation: enter-left 5s;
 }
@@ -151,16 +147,6 @@ body {
 
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
-  }
-}
-
-@keyframes flash-line{
-  0%{
-    opacity: 0;
-  }
-
-  100%{
-    opacity: 1;
   }
 }
 
