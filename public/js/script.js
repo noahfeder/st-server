@@ -2,8 +2,8 @@ window.onload  = function() {
   // grabbing global static DOM vars
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
-  var blurred = document.querySelectorAll('#firstDiv,#secondDiv,.svg-container');
-  var timer = 0;
+  var letterTimer = 0;
+  var blurTimer = 0;
   // move bottom row between top row
   function squeeze(DOM) {
     if (DOM.middle.offsetWidth > DOM.between.offsetWidth) {
@@ -42,14 +42,16 @@ window.onload  = function() {
   function handleText(text,id) {
     text = text.trim(); // strip whitespace
     var len = text.length,
-        DOM = getDom();
+        DOM = getDom(),
+        middleText = '';
     if (id === 'first') { // firstDiv text, top row
       if (len < 3) { // for 0, 1, or 2 character strings, don't capitalize
         DOM.first.textContent = '';
         DOM.last.textContent = '';
-        DOM.middle.textContent = text;
+        middleText = text;
+        DOM.middle.classList.add('lonely');
       } else { // loop over text string
-        var middleText = '';
+        DOM.middle.classList.remove('lonely');
         for (var i = 0; i < len; i++) {
           if (i === 0) { //first char
             DOM.first.textContent = text[i]
@@ -59,9 +61,8 @@ window.onload  = function() {
             middleText += text[i]
           }
         }
-        //DOM.middle.textContent = middleText;
-        spanifyText(middleText, DOM.middle);
       }
+      spanifyText(middleText, DOM.middle);
     } else { // secondDiv text, bottom row
       text = handleBlank(text,DOM); // if blank
       DOM.between.textContent = text;
@@ -94,7 +95,7 @@ window.onload  = function() {
     var splitText = text.split('');
     var textLength = text.length;
 
-    row.textContent=('');
+    row.textContent = '';
     for (var i = 0; i < textLength; i++)
     {
       var letterSpan = document.createElement('span');
@@ -104,17 +105,22 @@ window.onload  = function() {
     }
   }
 
-  /*
-  * Re-blur the text, if you wanna
-  */
-  function reblur() {
-  // using bind since a DOM collection is an array-like, not an array
-    Array.prototype.forEach.bind(blurred)(function(el) {
-
-    });
+  // added param to make DRYer - noah 8/22/16 1AM
+  function resizeLine(name,left,top,width) {
+    var line = document.querySelector('.'+name+'-line');
+    line.setAttribute("x", left);
+    line.setAttribute("y", top);
+    // short lines look weird on the sides, thus:
+    if (name !== 'top') {
+      width = (width < 20) ? 0 : width;
+    }
+    line.setAttribute("width", width);
+    var height = (window.innerWidth <= 550) ? 4 : 8;
+    line.setAttribute("height", height);
   }
 
-  function grab_coordinates(){
+
+  function grabCoordinates(){
     //###
     //Grab coordinates of text div boxes
     //###
@@ -138,37 +144,19 @@ window.onload  = function() {
     var left_line_width = is_first_div_longer ? (second_rect.left - first_rect.left) : (first_rect.left - second_rect.left);
     var right_line_right = is_first_div_longer ? second_rect.right : first_rect.right;
     var right_line_width = is_first_div_longer ? (first_rect.right - second_rect.right) : (second_rect.right - first_rect.right);
-    var marginOffset = is_first_div_longer ? -30: -45;
 
-    resize_top_line(first_rect.left, first_rect.top, first_div_width);
-    resize_left_line(left_line_left, (first_rect.bottom + marginOffset), left_line_width);
-    resize_right_line((right_line_right + 6), (first_rect.bottom  + marginOffset), right_line_width);
+    var topDifference = document.querySelector('.middle').getBoundingClientRect().top - document.querySelector('.first').getBoundingClientRect().top;
+    var bottomDifference = (first_rect.bottom - second_rect.top) / 2;
+    var marginOffset = is_first_div_longer ? (first_rect.bottom - bottomDifference + 8) : (first_rect.bottom - 2 * bottomDifference);
 
-  }
+    resizeLine('top', first_rect.left, (first_rect.top + topDifference), first_div_width);
+    resizeLine('left', left_line_left, marginOffset, left_line_width);
+    resizeLine('right', right_line_right, marginOffset, right_line_width);
 
-  function resize_top_line(left, top, width){
-    var top_line = document.querySelector('.top-line');
-      top_line.setAttribute("x", left);
-      top_line.setAttribute("y", top);
-      top_line.setAttribute("width", width);
-  }
-
-  function resize_left_line(left, top, width){
-    var left_line = document.querySelector('.left-line');
-      left_line.setAttribute("x", left);
-      left_line.setAttribute("y", top);
-      left_line.setAttribute("width", width);
-  }
-
-  function resize_right_line(right, top, width){
-    var right_line = document.querySelector('.right-line');
-      right_line.setAttribute("x", right);
-      right_line.setAttribute("y", top);
-      right_line.setAttribute("width", width);
   }
 
   function applyAnimations(){
-    window.clearTimeout(timer);
+    window.clearTimeout(letterTimer);
     var firstLetter = document.querySelector(".first");
     var lastLetter = document.querySelector(".last");
     var minorLetters = document.getElementsByClassName('minor_letter');
@@ -211,11 +199,10 @@ window.onload  = function() {
         //Random non-repeating animation assignment
         //###
         setTimeout(function(){
-        while (chosenAnimation === randomAnimation)
-        {
-          randomAnimation = Math.floor(Math.random() * animations.length);
-        }
-        chosenAnimation = randomAnimation;
+          while (chosenAnimation === randomAnimation) {
+            randomAnimation = Math.floor(Math.random() * animations.length);
+          }
+          chosenAnimation = randomAnimation;
 
           letter.classList.add(animations[randomAnimation]);
           letter.style.opacity = '1';//Make visible when animations start
@@ -223,7 +210,7 @@ window.onload  = function() {
     });
     },10);
 
-    timer = window.setTimeout(function() {
+    letterTimer = window.setTimeout(function() {
       firstLetter.style.position = 'static';
       lastLetter.style.position = 'static';
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
@@ -241,25 +228,38 @@ window.onload  = function() {
       },750)
     });
     },overallAnimationTime)
+  }
 
-
+  /**
+  * Reset animations and blur on button click
+  */
+  function reAnimate() {
+    window.clearTimeout(blurTimer);
+    grabCoordinates();
+    applyAnimations();
+    var blurred = document.querySelectorAll('#firstDiv,#secondDiv');
+    Array.prototype.forEach.bind(blurred)(function(el) {
+      el.classList.remove('blurry_animate');
+      blurTimer = window.setTimeout(function(el) {
+        el.classList.add('blurry_animate');
+      }, 10, el)
+    });
   }
 
   function listenToMe() {
     inputs[0].addEventListener('keyup',getValue)
     inputs[1].addEventListener('keyup',getValue)
-    button.addEventListener('click',reblur)
+    button.addEventListener('click',reAnimate)
     if (inputs[0].value !== "STRANGER") {
       handleText(inputs[0].value,inputs[0].id)
       handleText(inputs[1].value,inputs[1].id)
     }
-    window.onresize = grab_coordinates;
-    grab_coordinates();
+    window.onresize = grabCoordinates;
   }
 
   spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
   spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
   listenToMe();
-  applyAnimations()
-
+  grabCoordinates();
+  applyAnimations();
 }

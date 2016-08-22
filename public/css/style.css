@@ -26,7 +26,7 @@ body {
   stroke-linejoin: round;
   fill: transparent;
   stroke: #f00;
-  stroke-width: 4;
+  stroke-width: 0.5vw;
 }
 
 .words-container{
@@ -55,8 +55,8 @@ body {
   text-align: center;
   text-shadow: 1px 1px 2vw red;
 
-  background-image: linear-gradient(60deg,  #f54c42 0%, #e55524 5% , #f00 18%,  #e55555 50%, #f00 55%, #e55524 95%, #f54c42 100%);
-  background-size: 100% 50%;
+  background-image: linear-gradient(60deg,  #f54c42 0%, #FF9791 5% , #f00 18%,  #e55555 50%, #f00 55%, #fe7982 65%, #ff0d00 95%, #f54c42 100%);
+  background-size: 25% 25%;
   background-repeat: repeat;
   -webkit-background-clip: text;
   background-clip: text;
@@ -75,6 +75,11 @@ body {
 .middle {
   vertical-align: middle;
 }
+
+.middle.lonely {
+  margin-left: 2.5vw;
+}
+
 .first {
   position: relative;
   margin-right: -3.5vw;
@@ -166,7 +171,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
   @keyframes blur_resolve{
     0% {
       -webkit-filter: blur(100px) saturate(1.2);
@@ -188,6 +193,9 @@ body {
   .blurry {
     -webkit-filter: blur(0px) saturate(1.2);
     filter: blur(0px) saturate(1.2);
+  }
+  .svg-line {
+    filter: none;
   }
 }
 
