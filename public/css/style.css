@@ -4,6 +4,7 @@
 }
 body {
   background-color:  #000;
+  transform: rotate3d(0, 0, 0, 0deg);
 }
 
 .svg-container{
@@ -139,6 +140,23 @@ body {
 
   100%{
     -webkit-filter: blur(1px) saturate(1.2);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  @keyframes blur_resolve{
+    0% {
+      -webkit-filter: blur(100px) saturate(1.2);
+    }
+
+    100%{
+      -webkit-filter: blur(0px) saturate(1.2);
+    }
+  }
+
+  .blurry {
+    -webkit-filter: blur(0px) saturate(1.2);
+    filter: blur(0px) saturate(1.2);
   }
 }
 
