@@ -8,8 +8,6 @@ body {
   padding: 0;
   border: 0;
   background-color:  #000;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .svg-container{
