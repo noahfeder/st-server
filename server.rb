@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'dotenv'
-
+set :protection, :except => :frame_options
 Dotenv.load
 
 letters = {a: 84, b: 76, c: 77, d: 82, e: 71, f: 65,

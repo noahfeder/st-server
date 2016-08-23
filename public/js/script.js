@@ -247,18 +247,22 @@ window.onload  = function() {
   }
 
   function listenToMe() {
-    inputs[0].addEventListener('keyup',getValue)
-    inputs[1].addEventListener('keyup',getValue)
-    button.addEventListener('click',reAnimate)
+    button.addEventListener('click',function(){
+      handleText(inputs[0].value,inputs[0].id)
+      handleText(inputs[1].value,inputs[1].id)
+      reAnimate();
+    });
     if (inputs[0].value !== "STRANGER" || inputs[1].value !== "THINGS") {
       handleText(inputs[0].value,inputs[0].id)
       handleText(inputs[1].value,inputs[1].id)
+    } else {
+      spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
+      spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
   }
 
-  spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
-  spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
+
   listenToMe();
   grabCoordinates();
   applyAnimations();
