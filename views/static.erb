@@ -10,11 +10,6 @@
   <script src="/js/static.js"></script>
 </head>
 <body>
-  <!--div class="svg-container">
-    <img src="/img/line.png" class="top-line png-line">
-    <img src="/img/line.png" class="left-line png-line">
-    <img src="/img/line.png" class="right-line png-line">
-  </div-->
   <object>
   <svg version="1.1" id="theNotoriousSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg-container blurry_animate" width="100" height="100">
     <filter id="blurMe" x="0" y="0">
@@ -25,11 +20,6 @@
     <rect filter="url(#blurMe)" class="svg-line right-line" style="" x="<%= @right_line[:left] %>" y="<%= @right_line[:top] %>" height="8" width="<%= @right_line[:width] %>" />
   </svg>
   </object>
-  <style>
-    .words-container {
-      top:  90px;
-    }
-  </style>
   <div class="words-container">
     <div class="blurry" id="firstDiv">
         <span class="first">s</span>
@@ -39,11 +29,11 @@
     <div class="blurry squeeze" id="secondDiv">
         <span class="between">things</span>
     </div>
-  <div class="controls hide">
-      <input id="first" type="text" value="<%= @top %>">
-      <input id="second" type="text" value="<%= @bottom %>">
-    <button id="blurbutton">Re-Animate</button>
-  </div>
+    <div class="controls hide">
+        <input id="first" type="text" value="<%= @top %>">
+        <input id="second" type="text" value="<%= @bottom %>">
+      <button id="blurbutton">Re-Animate</button>
+    </div>
   </div>
 </body>
 </html>
