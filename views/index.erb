@@ -29,17 +29,21 @@
     <div class="blurry blurry_animate squeeze" id="secondDiv">
         <span class="between">things</span>
     </div>
-  <div class="controls">
-    <% if @top && @bottom %>
-      <input id="first" type="text" value="<%= @top %>">
-      <input id="second" type="text" value="<%= @bottom %>">
-    <% else %>
-      <input id="first" type="text" value="STRANGER">
-      <input id="second" type="text" value="THINGS">
-    <% end %>
-    <button id="blurbutton">Re-Animate</button>
-    <a href="http://st-text.herokuapp.com/stranger/things/print" download="strange-things.png"><button id="downloadbutton">Download</button></a>
-  </div>
+    <div class="controls">
+      <% if @top && @bottom %>
+      true
+        <input id="first" type="text" value="<%= @top.upcase %>">
+        <input id="second" type="text" value="<%= @bottom.upcase %>">
+      <% else %>
+      false
+        <input id="first" type="text" value="STRANGER">
+        <input id="second" type="text" value="THINGS">
+      <% end %>
+      <button id="blurbutton">Re-Animate</button>
+      <button id="downloadbutton">
+        <a href="http://st-text.herokuapp.com/stranger/things/print" download="strange-things.png">Download</a>
+      </button>
+    </div>
   </div>
 </body>
 </html>

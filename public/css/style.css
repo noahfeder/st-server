@@ -34,9 +34,19 @@ object {
   stroke: #f00;
   stroke-width: 0.5vw;
 }
+
+/* for safari since vw can't be used as stroke-width */
+
 .no-adownload .svg-line {
   stroke-width: 4px;
 }
+
+@media only screen and (max-width: 550px) {
+  .no-adownload .svg-line {
+    stroke-width: 2px;
+  }
+}
+
 .words-container{
   position: fixed;
   top: 0;
@@ -155,8 +165,8 @@ object {
 
 @keyframes blur_resolve{
   0% {
-    -webkit-filter: blur(100px) saturate(1.2);
-    filter: blur(100px) saturate(1.2);
+    -webkit-filter: blur(5px) saturate(1.2);
+    filter: blur(5px) saturate(1.2);
   }
 
   97% {
@@ -175,13 +185,13 @@ object {
 @media only screen and (max-width: 550px) {
   @keyframes blur_resolve{
     0% {
-      -webkit-filter: blur(100px) saturate(1.2);
-      filter: blur(100px) saturate(1.2);
+      -webkit-filter: blur(3px) saturate(1.2);
+      filter: blur(3px) saturate(1.2);
     }
 
     97% {
-      -webkit-filter: blur(10px) saturate(2);
-      filter: blur(10px) saturate(2);
+      -webkit-filter: blur(4px) saturate(2);
+      filter: blur(4px) saturate(2);
       text-shadow: 1px 1px 5vw red;
     }
 

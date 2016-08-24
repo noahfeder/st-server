@@ -217,16 +217,15 @@ window.onload  = function() {
       setTimeout(function(){
         topLine.classList.add('flash-line');
         topLine.style.display = "initial";
-
-      },10)
+      },750);
       setTimeout(function(){
         right_line.classList.add('flash-line');
         left_line.classList.add('flash-line');
         left_line.style.display = "initial";
         right_line.style.display = "initial";
-      },750)
+      },750);
     });
-    },overallAnimationTime)
+    },overallAnimationTime);
   }
 
   /**
@@ -243,12 +242,7 @@ window.onload  = function() {
         el.classList.add('blurry_animate');
       }, 10, el)
     });
-  }
-
-  function resizer() {
-    var resize = new CustomEvent('resize');
-    window.dispatchEvent(resize);
-  }
+  };
 
   function listenToMe() {
     button.addEventListener('click',function(){
@@ -264,11 +258,21 @@ window.onload  = function() {
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
-  }
+  };
 
 
   listenToMe();
   grabCoordinates();
-  window.setTimeout(resizer,2500)
   applyAnimations();
-}
+
+
+  if (!Modernizr.adownload) {
+    // fix safari SVG weirdness
+    function resizer() {
+      var resize = new CustomEvent('resize');
+      window.dispatchEvent(resize);
+    }
+    window.setTimeout(resizer,2500);
+  } // end safari SVG weirdness block
+
+} // end onload block

@@ -10,9 +10,14 @@ letters = {a: 84, b: 76, c: 77, d: 82, e: 71, f: 65,
 get "/" do
   erb :index
 end
+get "/:top/:bottom" do
+  @top = params[:top].downcase.gsub(/[^a-z]/i, "")
+  @bottom = params[:bottom].downcase.gsub(/[^a-z]/i, "")
+  erb :index
+end
 get "/:top/:bottom/static" do
-  @top = params[:top] #stranger
-  @bottom = params[:bottom]
+  @top = params[:top].downcase.gsub!(/[^a-z]/i, "")
+  @bottom = params[:bottom].downcase.gsub!(/[^a-z]/i, "")
   @top_length = 0
   @bottom_length = 0
   @top.split('').each_with_index do |letter,index|
@@ -60,7 +65,7 @@ end
 get "/:top/:bottom/print" do
   @top = params[:top]
   @bottom = params[:bottom]
-  redirect to("https://phantomjscloud.com/api/browser/v2/#{ENV['KEY']}/?request={url:%22https://st-text.herokuapp.com/#{@top}/#{@bottom}/static%22,renderType:%22png%22,renderSettings:{viewport:{height:400,width:750},clipRectangle:{height:400,width:750,top:0,left:0}}}")
+  "https://phantomjscloud.com/api/browser/v2/#{ENV['KEY']}/?request={url:%22https://st-text.herokuapp.com/#{@top}/#{@bottom}/static%22,renderType:%22png%22,renderSettings:{viewport:{height:400,width:750},clipRectangle:{height:400,width:750,top:0,left:0}}}"
 end
 get "/:garbage" do
   erb :index
