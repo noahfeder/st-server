@@ -10,27 +10,23 @@
   <script src="/js/static.js"></script>
 </head>
 <body>
-  <div class="svg-container">
+  <!--div class="svg-container">
     <img src="/img/line.png" class="top-line png-line">
     <img src="/img/line.png" class="left-line png-line">
     <img src="/img/line.png" class="right-line png-line">
-  </div>
+  </div-->
+  <object>
+  <svg version="1.1" id="theNotoriousSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg-container blurry_animate" width="100" height="100">
+    <filter id="blurMe" x="0" y="0">
+       <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+    </filter>
+    <rect filter="url(#blurMe)" class="svg-line top-line" style="" x="<%= @top_line[:left] %>" y="<%= @top_line[:top] %>" height="8" width="<%= @top_line[:width] %>" />
+    <rect filter="url(#blurMe)" class="svg-line left-line" style="" x="<%= @left_line[:left] %>" y="<%= @left_line[:top] %>" height="8" width="<%= @left_line[:width] %>" />
+    <rect filter="url(#blurMe)" class="svg-line right-line" style="" x="<%= @right_line[:left] %>" y="<%= @right_line[:top] %>" height="8" width="<%= @right_line[:width] %>" />
+  </svg>
+  </object>
   <style>
-    .top-line {
-      width:  <%= @top_line[:width] %>px;
-      left:  <%= @top_line[:left] %>px;
-      top:  <%= @top_line[:top] %>px;
-    }
-    .left-line {
-      width:  <%= @left_line[:width] %>px;
-      left:  <%= @left_line[:left] %>px;
-      top:  <%= @left_line[:top] %>px;
-    }
-    .right-line {
-      width:  <%= @right_line[:width] %>px;
-      left:  <%= @right_line[:left] %>px;
-      top:  <%= @right_line[:top] %>px;
-    }
+    /
     .words-container {
       top:  90px;
     }

@@ -2,6 +2,7 @@ window.onload  = function() {
   // grabbing global static DOM vars
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
+  var download = document.getElementById('downloadbutton');
   var letterTimer = 0;
   var blurTimer = 0;
   // move bottom row between top row
@@ -244,6 +245,11 @@ window.onload  = function() {
     });
   };
 
+  function downloader() {
+    var link = document.getElementById('downloadlink');
+    // link.setAttribute('download', )
+  };
+
   function listenToMe() {
     button.addEventListener('click',function(){
       handleText(inputs[0].value,inputs[0].id)
@@ -258,6 +264,7 @@ window.onload  = function() {
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
+    download.addEventListener('click',downloader);
   };
 
 

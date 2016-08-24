@@ -31,18 +31,24 @@
     </div>
     <div class="controls">
       <% if @top && @bottom %>
-      true
         <input id="first" type="text" value="<%= @top.upcase %>">
         <input id="second" type="text" value="<%= @bottom.upcase %>">
+        <button id="blurbutton">Re-Animate</button>
+        <a id="downloadlink" href="http://st-text.herokuapp.com/<%= @top %>/<%= @bottom %>/print" download="<%= @top %>-<%= @bottom %>.png">
+          <button id="downloadbutton">
+            Download
+          </button>
+        </a>
       <% else %>
-      false
         <input id="first" type="text" value="STRANGER">
         <input id="second" type="text" value="THINGS">
+        <button id="blurbutton">Re-Animate</button>
+        <a id="downloadlink" href="http://st-text.herokuapp.com/stranger/things/print" download="stranger-things.png">
+          <button id="downloadbutton">
+            Download
+          </button>
+        </a>
       <% end %>
-      <button id="blurbutton">Re-Animate</button>
-      <button id="downloadbutton">
-        <a href="http://st-text.herokuapp.com/stranger/things/print" download="strange-things.png">Download</a>
-      </button>
     </div>
   </div>
 </body>

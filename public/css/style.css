@@ -127,6 +127,9 @@ object {
   max-width: 150px;
 }
 
+#downloadbutton {
+  width: 100%;
+}
 .hide {
   display: none;
 }
