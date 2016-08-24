@@ -33,8 +33,8 @@
       <% if @top && @bottom %>
         <input id="first" type="text" maxlength="8" value="<%= @top.upcase %>">
         <input id="second" type="text" maxlength="8" value="<%= @bottom.upcase %>">
-        <button id="blurbutton">Re-Animate</button>
-        <a id="downloadlink" href="http://st-text.herokuapp.com/<%= @top %>/<%= @bottom %>/print" download="<%= @top %>-<%= @bottom %>.png">
+        <a><button id="blurbutton">Re-Animate</button></a>
+        <a id="downloadlink" href="http://st-text.herokuapp.com/<%= @top %>/<%= @bottom %>/print">
           <button id="downloadbutton">
             Download
           </button>
@@ -42,8 +42,8 @@
       <% else %>
         <input id="first" type="text" maxlength="8" value="STRANGER">
         <input id="second" type="text" maxlength="8" value="THINGS">
-        <button id="blurbutton">Re-Animate</button>
-        <a id="downloadlink" href="http://st-text.herokuapp.com/stranger/things/print" download="stranger-things.png">
+        <a><button id="blurbutton">Re-Animate</button></a>
+        <a id="downloadlink" href="http://st-text.herokuapp.com/stranger/things/print">
           <button id="downloadbutton">
             Download
           </button>

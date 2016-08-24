@@ -25,6 +25,7 @@ object {
   left: 0;
   z-index: -1;
   display: inline;
+  transition: filter 400ms, opacity: 400ms;
 }
 
 .svg-line {
@@ -57,7 +58,7 @@ object {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  transition: filter 400ms, opacity: 400ms;
 }
 
 .blurry {
@@ -116,20 +117,56 @@ object {
 }
 
 .controls {
+  position: fixed;
   display: flex;
-  flex-flow:  column nowrap;
-  margin:  0 auto;
-  max-width: 50vw;
+  flex-flow:  row nowrap;
+  width: 100vw;
+  min-width: 100vw;
+  height: 40px;
+  max-height: 40px;
+  bottom: 0;
+  left: 0;
+  transition: bottom 400ms;
 }
 
 .controls > * {
-  margin: 5px;
-  max-width: 150px;
+  box-sizing: border-box;
+  flex: 1 1 183.3px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-#downloadbutton {
+.controls > a {
+  padding: 5px 10px;
+}
+
+.moveup .blurry, .moveup .svg-container {
+  filter: saturate(0.5);
+  opacity: 0.5;
+}
+
+.moveup .controls {
+  bottom: 60vh;
+}
+
+@media only screen and (max-width: 460px) {
+  .controls > * {
+    flex-basis: 160px;
+  }
+  .controls {
+    height: 60px;
+    max-height: 60px;
+    flex-wrap: wrap;
+  }
+  .moveup .controls {
+    bottom: 0;
+  }
+}
+
+button {
   width: 100%;
 }
+
 .hide {
   display: none;
 }

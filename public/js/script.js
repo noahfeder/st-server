@@ -3,6 +3,8 @@ window.onload  = function() {
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
   var download = document.getElementById('downloadbutton');
+  var controls = document.querySelector('.controls');
+  var body = document.body;
   var letterTimer = 0;
   var blurTimer = 0;
   // move bottom row between top row
@@ -79,17 +81,6 @@ window.onload  = function() {
           (key > 64 && key < 91) || //letters
           (key > 185 && key < 193) || (key > 218 && key < 223) || //special chars
           key === 8); //backspace
-  }
-
-  // get text and id on keyup
-  function getValue(e) {
-    if (isValidKey(e.keyCode)) {
-      var text = this.value,
-            id = this.id;
-      handleText(text,id);
-      grabCoordinates();
-      applyAnimations();
-    }
   }
 
   function spanifyText(text, row){
@@ -247,8 +238,16 @@ window.onload  = function() {
 
   function downloader() {
     var link = document.getElementById('downloadlink');
-    // link.setAttribute('download', )
+    link.setAttribute('href', 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print');
   };
+
+  function moveUp() {
+    body.classList.add('moveup');
+  }
+
+  function moveDown() {
+    body.classList.remove('moveup');
+  }
 
   function listenToMe() {
     button.addEventListener('click',function(){
@@ -256,16 +255,30 @@ window.onload  = function() {
       handleText(inputs[1].value,inputs[1].id)
       reAnimate();
     });
+    inputs[1].addEventListener('keyup',function(e) {
+      if (e.keyCode === 13) {
+        handleText(inputs[0].value,inputs[0].id);
+        handleText(inputs[1].value,inputs[1].id);
+        grabCoordinates();
+        applyAnimations();
+      }
+    })
     if (inputs[0].value !== "STRANGER" || inputs[1].value !== "THINGS") {
-      handleText(inputs[0].value,inputs[0].id)
-      handleText(inputs[1].value,inputs[1].id)
+      handleText(inputs[0].value,inputs[0].id);
+      handleText(inputs[1].value,inputs[1].id);
     } else {
       spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
     download.addEventListener('click',downloader);
-  };
+    Array.prototype.forEach.bind(inputs)(function(el){
+      el.addEventListener('focus',moveUp);
+      el.addEventListener('blur',moveDown);
+    })
+
+
+  }; //end listenToMe function
 
 
   listenToMe();
