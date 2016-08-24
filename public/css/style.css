@@ -151,7 +151,7 @@ object {
 
 @media only screen and (max-width: 460px) {
   .controls > * {
-    flex-basis: 160px;
+    flex-basis: 49%;
   }
   .controls {
     height: 60px;
