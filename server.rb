@@ -63,8 +63,8 @@ get "/:top/:bottom/print" do
   redirect to("https://phantomjscloud.com/api/browser/v2/#{ENV['KEY']}/?request={url:%22https://st-text.herokuapp.com/#{@top}/#{@bottom}/static%22,renderType:%22png%22,renderSettings:{viewport:{height:400,width:750},clipRectangle:{height:400,width:750,top:0,left:0}}}")
 end
 get "/:top/:bottom" do
-  @top = params[:top].downcase.gsub(/[^a-z]/i, "")
-  @bottom = params[:bottom].downcase.gsub(/[^a-z]/i, "")
+  @top = params[:top].downcase.gsub(/[^a-z]/i, "")[0..7]
+  @bottom = params[:bottom].downcase.gsub(/[^a-z]/i, "")[0..7]
   erb :index
 end
 get "/:garbage" do

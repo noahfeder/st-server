@@ -31,8 +31,8 @@
     </div>
     <div class="controls">
       <% if @top && @bottom %>
-        <input id="first" type="text" value="<%= @top.upcase %>">
-        <input id="second" type="text" value="<%= @bottom.upcase %>">
+        <input id="first" type="text" maxlength="8" value="<%= @top.upcase %>">
+        <input id="second" type="text" maxlength="8" value="<%= @bottom.upcase %>">
         <button id="blurbutton">Re-Animate</button>
         <a id="downloadlink" href="http://st-text.herokuapp.com/<%= @top %>/<%= @bottom %>/print" download="<%= @top %>-<%= @bottom %>.png">
           <button id="downloadbutton">
@@ -40,8 +40,8 @@
           </button>
         </a>
       <% else %>
-        <input id="first" type="text" value="STRANGER">
-        <input id="second" type="text" value="THINGS">
+        <input id="first" type="text" maxlength="8" value="STRANGER">
+        <input id="second" type="text" maxlength="8" value="THINGS">
         <button id="blurbutton">Re-Animate</button>
         <a id="downloadlink" href="http://st-text.herokuapp.com/stranger/things/print" download="stranger-things.png">
           <button id="downloadbutton">
