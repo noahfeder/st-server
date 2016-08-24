@@ -8,6 +8,7 @@ body {
   padding: 0;
   border: 0;
   background-color:  #000;
+  overflow: hidden;
 }
 object {
   width: 100%;
@@ -33,7 +34,9 @@ object {
   stroke: #f00;
   stroke-width: 0.5vw;
 }
-
+.no-adownload .svg-line {
+  stroke-width: 4px;
+}
 .words-container{
   position: fixed;
   top: 0;

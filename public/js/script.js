@@ -152,7 +152,6 @@ window.onload  = function() {
     resizeLine('top', first_rect.left, (first_rect.top + topDifference), first_div_width);
     resizeLine('left', left_line_left, marginOffset, left_line_width);
     resizeLine('right', right_line_right, marginOffset, right_line_width);
-
   }
 
   function applyAnimations(){
@@ -246,6 +245,11 @@ window.onload  = function() {
     });
   }
 
+  function resizer() {
+    var resize = new CustomEvent('resize');
+    window.dispatchEvent(resize);
+  }
+
   function listenToMe() {
     button.addEventListener('click',function(){
       handleText(inputs[0].value,inputs[0].id)
@@ -265,5 +269,6 @@ window.onload  = function() {
 
   listenToMe();
   grabCoordinates();
+  window.setTimeout(resizer,2500)
   applyAnimations();
 }

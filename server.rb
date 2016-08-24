@@ -55,7 +55,7 @@ get "/:top/:bottom/static" do
   @right_line[:left] = @top_length + @left_line[:width] + ((750 - @bottom_length) / 2) if !is_first_longer?
   @left_line[:width] = 0 if @left_line[:width] < 20
   @right_line[:width] = 0 if @right_line[:width] < 20
-  erb :show
+  erb :static
 end
 get "/:top/:bottom/print" do
   @top = params[:top]
