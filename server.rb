@@ -15,23 +15,24 @@ get "/:top/:bottom/static" do
   @bottom = params[:bottom].downcase.gsub(/[^a-z]/i, "")[0..7]
   @top_length = 0
   @bottom_length = 0
+  @middle_length = 0
+
   @top.split('').each_with_index do |letter,index|
     if (index == 0 || index == (@top.length - 1))
-      @top_length += (letters[letter.to_sym] * 1.3)
+      @top_length += (letters[letter.to_sym])
     else
-      @top_length += letters[letter.to_sym]
+      @top_length += letters[letter.to_sym] * 0.77
+      @middle_length += letters[letter.to_sym] * 0.77
     end
   end
-  @bottom.split('').each_with_index do |letter,index|
-    if (index == 0 || index == (@bottom.length - 1))
-      @bottom_length += (letters[letter.to_sym] * 1.3)
-    else
-      @bottom_length += letters[letter.to_sym]
-    end
+
+  @bottom.split('').each do |letter|
+      @bottom_length += letters[letter.to_sym] * 0.85
   end
-  def is_first_longer?
-    @top_length > @bottom_length
-  end
+
+  @is_first_longer = @top_length > @bottom_length
+  @squeeze = @middle_length > @bottom_length
+
   @top_line = {
     :width => @top_length,
     :left => (750 - @top_length) / 2,
@@ -47,14 +48,17 @@ get "/:top/:bottom/static" do
     :left => @bottom_length + @left_line[:width] + ((750 - @top_length) / 2),
     :top => 200.75
   }
-  @right_line[:top] = 227.5 if is_first_longer?
-  @left_line[:top] = 227.5 if is_first_longer?
+  @right_line[:top] = 227.5 if @is_first_longer
+  @left_line[:top] = 227.5 if @is_first_longer
   @left_line[:width] = -1 * @left_line[:width] if @left_line[:width] < 0
   @right_line[:width] = -1 * @right_line[:width] if @right_line[:width] < 0
-  @left_line[:left] = (750 - @bottom_length) / 2 if !is_first_longer?
-  @right_line[:left] = @top_length + @left_line[:width] + ((750 - @bottom_length) / 2) if !is_first_longer?
+  @left_line[:left] = (750 - @bottom_length) / 2 if !@is_first_longer
+  @right_line[:left] = @top_length + @left_line[:width] + ((750 - @bottom_length) / 2) if !@is_first_longer
   @left_line[:width] = 0 if @left_line[:width] < 20
   @right_line[:width] = 0 if @right_line[:width] < 20
+  @first = @top[0]
+  @last = @top[-1]
+  @middle = @top[1..(@top.length - 2)]
   erb :static
 end
 get "/:top/:bottom/print" do

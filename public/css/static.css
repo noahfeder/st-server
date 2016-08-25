@@ -1,39 +1,65 @@
-.flash-line{
-  animation: none;
+@font-face {
+  font-family: ben;
+  src: url(../ben.ttf);
 }
 
-.enter-left-slow{
-   animation: none;
+body {
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background-color:  #000;
+  overflow: hidden;
 }
 
-.enter-right-slow{
-   animation: none;
+.svg-container{
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: inline;
 }
 
-.enter-left{
-  animation: none;
+.svg-line {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+  stroke: #f00;
+  stroke-width: 4px;
+}
+.blurry {
+  position: relative;
+  margin:  0 auto;
+  padding: 0 10px;
+  font-family: ben;
+  letter-spacing: -4.5px;
+  text-transform: uppercase;
+  font-size: 75px;
+  color:rgba(0,0,0,0.88);
+  -webkit-text-stroke: 4px transparent;
+  text-align: center;
+  text-shadow: 1px 1px 25px red;
+
+  background-image: linear-gradient(60deg,  #f54c42 0%, #FF9791 5% , #f00 18%,  #e55555 50%, #f00 55%, #fe7982 65%, #ff0d00 95%, #f54c42 100%);
+  background-size: 25% 25%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-filter: blur(1px) saturate(1.2);
+  filter: blur(1px) saturate(1.2);
 }
 
-.enter-right{
-  animation: none;
-}
-
-.enter-top{
-  animation: none;
-}
-
-.enter-bottom{
-  animation: none;
-}
-
-.blurry_animate {
-    animation: none;
-}
 .last, .first {
   position: static;
-  font-size: 130px;
+  font-size: 97.5px;
+  vertical-align: top;
 }
-
+.middle {
+  vertical-align: middle;
+}
 .middle.lonely {
   margin-left: 20px;
 }
@@ -53,61 +79,10 @@
   margin-top: -58px;
 }
 
-object {
-  width: 100%;
-  display: block;
-  height: auto;
-  position: relative;
-  padding-top: 100%;
-}
-.svg-container{
-  width:  100vw;
-  height:  100vh;
-  position:  absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: inline;
-}
-
-.svg-line {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: transparent;
-  stroke: #f00;
-  stroke-width: 4px;
-}
-.blurry {
-  position: relative;
-  margin:  0 auto;
-  padding: 0 10px;
-  font-family: ben;
-  letter-spacing: -8px;
-  text-transform: uppercase;
-  font-size: 100px;
-  color:rgba(0,0,0,0.88);
-  -webkit-text-stroke: 4px transparent;
-  text-align: center;
-  text-shadow: 1px 1px 25px red;
-
-  background-image: linear-gradient(60deg,  #f54c42 0%, #FF9791 5% , #f00 18%,  #e55555 50%, #f00 55%, #fe7982 65%, #ff0d00 95%, #f54c42 100%);
-  background-size: 25% 25%;
-  background-repeat: repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-filter: blur(1px) saturate(1.2);
-  filter: blur(1px) saturate(1.2);
-}
-
-.png-line {
-  position: absolute;
-  display: block;
-  height: 20px;
-}
 
 .words-container{
   position: fixed;
-  top: 85px;
+  top: 0;
   left: 0;
   display: flex;
   height: 100vh;

@@ -5,34 +5,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>st</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
   <link rel="stylesheet" type="text/css" href="/css/static.css">
   <script src="/js/static.js"></script>
 </head>
 <body>
-  <object>
   <svg version="1.1" id="theNotoriousSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg-container blurry_animate" width="100" height="100">
     <filter id="blurMe" x="0" y="0">
        <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
     </filter>
-    <rect filter="url(#blurMe)" class="svg-line top-line" style="" x="<%= @top_line[:left] %>" y="<%= @top_line[:top] %>" height="8" width="<%= @top_line[:width] %>" />
+    <rect filter="url(#blurMe)" class="svg-line top-line" style="" x="<%= @top_line[:left] %>" y="<%= @squeeze ? "121" : "111" %>" height="8" width="<%= @top_line[:width] %>" />
     <rect filter="url(#blurMe)" class="svg-line left-line" style="" x="<%= @left_line[:left] %>" y="<%= @left_line[:top] %>" height="8" width="<%= @left_line[:width] %>" />
     <rect filter="url(#blurMe)" class="svg-line right-line" style="" x="<%= @right_line[:left] %>" y="<%= @right_line[:top] %>" height="8" width="<%= @right_line[:width] %>" />
   </svg>
-  </object>
   <div class="words-container">
     <div class="blurry" id="firstDiv">
-        <span class="first">s</span>
-        <span class="middle">trange</span>
-        <span class="last">r</span>
+        <span class="first"><%= @first %></span>
+        <span class="middle"><%= @middle %></span>
+        <span class="last"><%= @last %></span>
     </div>
-    <div class="blurry squeeze" id="secondDiv">
-        <span class="between">things</span>
-    </div>
-    <div class="controls hide">
-        <input id="first" type="text" value="<%= @top %>">
-        <input id="second" type="text" value="<%= @bottom %>">
-      <button id="blurbutton">Re-Animate</button>
+
+    <div class="blurry <%= @squeeze ? "squeeze" : " " %>" id="secondDiv">
+        <span class="between"><%= @bottom %></span>
     </div>
   </div>
 </body>

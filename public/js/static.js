@@ -1,30 +1,5 @@
 window.onload  = function() {
-  // polyfill from https://github.com/tom-james-watson/phantomjs-polyfill
-  if (typeof Function.prototype.bind != 'function') {
-      Function.prototype.bind = function bind(obj) {
-          var args = Array.prototype.slice.call(arguments, 1),
-              self = this,
-              nop = function() {
-              },
-              bound = function() {
-                  return self.apply(
-                      this instanceof nop ? this : (obj || {}), args.concat(
-                          Array.prototype.slice.call(arguments)
-                      )
-                  );
-              };
-          nop.prototype = this.prototype || {};
-          bound.prototype = new nop();
-          return bound;
-      };
-  }
 
-  // grabbing global static DOM vars
-  var inputs = document.getElementsByTagName('input');
-  var button = document.getElementById('blurbutton');
-  var letterTimer = 0;
-  var blurTimer = 0;
-  // move bottom row between top row
   function squeeze(DOM) {
     if (DOM.middle.offsetWidth > DOM.between.offsetWidth) {
       DOM.secondDiv.classList.add('squeeze');
@@ -44,18 +19,7 @@ window.onload  = function() {
     'dashes' : document.getElementsByClassName('dash')
     };
   }
-  /**
-  * If the second row is an empty string, need to replace with a filler char
-  */
-  function handleBlank(text, DOM) {
-    if (text === '') {
-      DOM.between.classList.add('invisible');
-      text = 'X'
-    } else {
-      DOM.between.classList.remove('invisible');
-    }
-    return text;
-  }
+
   /*
   * take text from inputs OR url and add to DOM
   */
@@ -153,9 +117,9 @@ window.onload  = function() {
 
   }
 
-  spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
-  spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
-  handleText(inputs[0].value,inputs[0].id)
-  handleText(inputs[1].value,inputs[1].id)
+  // spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
+  // spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
+  // handleText(inputs[0].value,inputs[0].id)
+  // handleText(inputs[1].value,inputs[1].id)
   // grabCoordinates();
 }
