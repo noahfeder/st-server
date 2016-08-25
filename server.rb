@@ -1,6 +1,11 @@
 require 'sinatra'
 require 'dotenv'
 set :protection, :except => :frame_options
+require 'sinatra/cross_origin'
+
+configure do
+  enable :cross_origin
+end
 Dotenv.load
 
 letters = {a: 84, b: 76, c: 77, d: 82, e: 71, f: 65,
