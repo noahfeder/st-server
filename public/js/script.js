@@ -249,6 +249,23 @@ window.onload  = function() {
     body.classList.remove('moveup');
   }
 
+  function blobJob() { //todo add top bottom reqs
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://st-text.herokuapp.com/stranger/trings/print");
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = function()
+    {
+        blob = xhr.response;//xhr.response is now a blob object
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "stranger-things.png";
+        a.click();
+    }
+    xhr.send();
+  }
+
   function listenToMe() {
     button.addEventListener('click',function(){
       handleText(inputs[0].value,inputs[0].id)
@@ -272,7 +289,7 @@ window.onload  = function() {
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
-    download.addEventListener('click',downloader);
+    download.addEventListener('click',blobJob);
     Array.prototype.forEach.bind(inputs)(function(el){
       el.addEventListener('focus',moveUp);
       el.addEventListener('blur',moveDown);
