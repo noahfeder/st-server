@@ -1,7 +1,8 @@
+"use strict";
 window.onload  = function() {
   //browser detection! from http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-  var isFirefox = typeof InstallTrigger !== 'undefined';
+  var isFirefox = (typeof InstallTrigger !== 'undefined');
   var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
   var isIE = /*@cc_on!@*/false || !!document.documentMode;
   var isEdge = !isIE && !!window.StyleMedia;
@@ -11,11 +12,11 @@ window.onload  = function() {
   // grabbing global static DOM vars
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
-  var download = document.getElementById('downloadbutton');
-  var controls = document.querySelector('.controls');
+  var download = document.getElementById('downloadlink');
   var body = document.body;
   var letterTimer = 0;
   var blurTimer = 0;
+
   // move bottom row between top row
   function squeeze(DOM) {
     if (DOM.middle.offsetWidth > DOM.between.offsetWidth) {
@@ -42,20 +43,37 @@ window.onload  = function() {
   function handleBlank(text, DOM) {
     if (text === '') {
       DOM.between.classList.add('invisible');
-      text = 'X'
+      text = 'X';
     } else {
       DOM.between.classList.remove('invisible');
     }
     return text;
   }
   /*
+  * Turn text into individual spans so we can slide 'em around
+  */
+  function spanifyText(text, row){
+    var splitText = text.split('');
+    var textLength = text.length;
+    row.textContent = '';
+    var i = 0;
+    var letterSpan = null;
+    for (i = 0; i < textLength; i++) {
+      letterSpan = document.createElement('span');
+      letterSpan.classList.add('minor_letter');
+      letterSpan.textContent = splitText[i];
+      row.appendChild(letterSpan);
+    }
+  }
+
+  /*
   * take text from inputs OR url and add to DOM
   */
   function handleText(text,id) {
     text = text.trim(); // strip whitespace
-    var len = text.length,
-        DOM = getDom(),
-        middleText = '';
+    var len = text.length;
+    var DOM = getDom();
+    var middleText = '';
     if (id === 'first') { // firstDiv text, top row
       if (len < 3) { // for 0, 1, or 2 character strings, don't capitalize
         DOM.first.textContent = '';
@@ -64,13 +82,14 @@ window.onload  = function() {
         DOM.middle.classList.add('lonely');
       } else { // loop over text string
         DOM.middle.classList.remove('lonely');
-        for (var i = 0; i < len; i++) {
+        var i = 0;
+        for (i = 0; i < len; i++) {
           if (i === 0) { //first char
-            DOM.first.textContent = text[i]
+            DOM.first.textContent = text[i];
           } else if (i === len - 1) { //last char
-            DOM.last.textContent = text[i]
+            DOM.last.textContent = text[i];
           } else { //other chars
-            middleText += text[i]
+            middleText += text[i];
           }
         }
       }
@@ -83,30 +102,7 @@ window.onload  = function() {
     squeeze(DOM);
   }
 
-  // check keycodes for valid printable characters (or return/backspace)
-  function isValidKey(key) {
-    return ((key > 47 && key < 58) || //numbers
-          key === 13 || //return
-          (key > 64 && key < 91) || //letters
-          (key > 185 && key < 193) || (key > 218 && key < 223) || //special chars
-          key === 8); //backspace
-  }
-
-  function spanifyText(text, row){
-    var splitText = text.split('');
-    var textLength = text.length;
-
-    row.textContent = '';
-    for (var i = 0; i < textLength; i++)
-    {
-      var letterSpan = document.createElement('span');
-      letterSpan.classList.add('minor_letter');
-      letterSpan.textContent = splitText[i];
-      row.appendChild(letterSpan);
-    }
-  }
-
-  // added param to make DRYer - noah 8/22/16 1AM
+  // Resize SVG lines on the fly
   function resizeLine(name,left,top,width) {
     var line = document.querySelector('.'+name+'-line');
     line.setAttribute("x", left);
@@ -198,7 +194,7 @@ window.onload  = function() {
         //###
         //Random non-repeating animation assignment
         //###
-        setTimeout(function(){
+        window.setTimeout(function(){
           while (chosenAnimation === randomAnimation) {
             randomAnimation = Math.floor(Math.random() * animations.length);
           }
@@ -206,7 +202,7 @@ window.onload  = function() {
 
           letter.classList.add(animations[randomAnimation]);
           letter.style.opacity = '1';//Make visible when animations start
-        },randomStartTime)
+        },randomStartTime);
     });
     },10);
 
@@ -215,11 +211,11 @@ window.onload  = function() {
       lastLetter.style.position = 'static';
       Array.prototype.forEach.bind(minorLetters)(function(letter) {
       letter.style.position = 'static';
-      setTimeout(function(){
+      window.setTimeout(function(){
         topLine.classList.add('flash-line');
         topLine.style.display = "initial";
       },750);
-      setTimeout(function(){
+      window.setTimeout(function(){
         right_line.classList.add('flash-line');
         left_line.classList.add('flash-line');
         left_line.style.display = "initial";
@@ -241,55 +237,50 @@ window.onload  = function() {
       el.classList.remove('blurry_animate');
       blurTimer = window.setTimeout(function(el) {
         el.classList.add('blurry_animate');
-      }, 10, el)
+      }, 10, el);
     });
-  };
-
-  function downloader() {
-    // var link = document.getElementById('downloadlink');
-    // link.setAttribute('href', 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print');
-    if (isChrome) {
-      blobJob();
-    } else {
-      loadImg();
-      document.body.classList.add('show');
-    }
-  };
+  }
 
   function moveUp() {
     body.classList.add('moveup');
   }
 
-  function moveDown() {
+  function moveDown(e) {
+    if (e.relatedTarget.localName === 'button') {
+      e.relatedTarget.click()
+    }
     body.classList.remove('moveup');
   }
-
+  // load in img src on modal
   function loadImg() {
     var img = document.querySelector('.modal img');
     img.src = 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print';
   }
 
-  function blobJob() { // TODO add top bottom reqs and also maybe TODO DELETE ME
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://st-text.herokuapp.com/stranger/things/print");
-    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
-    xhr.onload = function() {
-        var blob = new Blob([xhr.response],{type: 'image/png'});
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement("a");
-        a.href = url;
-        a.download = "stranger-things.png";
-        a.click();
+  function downloader() {
+    if (isChrome) {
+      var link = document.getElementById('downloadlink');
+      link.setAttribute('download', inputs[0].value.toLowerCase() + '-' + inputs[1].value.toLowerCase() + '.png');
+      link.setAttribute('href', 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print');
+    } else {
+      loadImg();
+      body.classList.add('show');
     }
-    xhr.send();
+  }
+
+  function hideModal(e) {
+    if (body.classList[0] === 'show' && e.target.id !== "downloadbutton") {
+      body.classList.remove('show');
+    }
   }
 
   function listenToMe() {
     button.addEventListener('click',function(){
-      handleText(inputs[0].value,inputs[0].id)
-      handleText(inputs[1].value,inputs[1].id)
+      handleText(inputs[0].value,inputs[0].id);
+      handleText(inputs[1].value,inputs[1].id);
       reAnimate();
     });
+
     inputs[1].addEventListener('keyup',function(e) {
       if (e.keyCode === 13) {
         moveDown();
@@ -299,6 +290,7 @@ window.onload  = function() {
         applyAnimations();
       }
     });
+
     if (inputs[0].value !== "STRANGER" || inputs[1].value !== "THINGS") {
       handleText(inputs[0].value,inputs[0].id);
       handleText(inputs[1].value,inputs[1].id);
@@ -306,6 +298,7 @@ window.onload  = function() {
       spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
+
     window.onresize = grabCoordinates;
 
     download.addEventListener('click',downloader);
@@ -313,28 +306,27 @@ window.onload  = function() {
     Array.prototype.forEach.bind(inputs)(function(el){
       el.addEventListener('focus',moveUp);
       el.addEventListener('blur',moveDown);
-    })
+    });
 
+    var page = document.querySelector('.words-container');
+    page.addEventListener('click',hideModal)
+  } //end listenToMe function
 
-  }; //end listenToMe function
+  if (isIE || isEdge) {
+    window.location.replace("https://www.google.com/chrome/");
+  } else {
+    listenToMe();
+    grabCoordinates();
+    applyAnimations();
+  }
 
- if (isIE || isEdge) {
-  window.location.replace("https://www.google.com/chrome/")
- } else {
-  listenToMe();
-  grabCoordinates();
-  applyAnimations();
- }
-
-
+  function resizer() {
+    var resize = new CustomEvent('resize');
+    window.dispatchEvent(resize);
+  }
 
   if (!Modernizr.adownload) {
-    // fix safari SVG weirdness
-    function resizer() {
-      var resize = new CustomEvent('resize');
-      window.dispatchEvent(resize);
-    }
     window.setTimeout(resizer,2500);
   } // end safari SVG weirdness block
 
-} // end onload block
+}; // end onload block

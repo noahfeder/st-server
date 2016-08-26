@@ -233,7 +233,7 @@ input {
 }
 
 .show .modal {
-  top: 15vw;
+  top: 15vh;
 }
 .show .svg, .show .words-container {
   -webkit-filter:  saturate(0.5) opacity(0.5);
@@ -264,15 +264,9 @@ input {
   width: 60vw;
   margin: 0 10vw;
   height: auto;
+  max-height: 100%;
 }
 
-@media only screen and (max-width: 850px) {
-  /* .modal {
-    width: 100%;
-    margin: 0 6vw;
-    left
-  } */
-}
 @keyframes blur_resolve{
   0% {
     -webkit-filter: blur(5px) saturate(1.2);
