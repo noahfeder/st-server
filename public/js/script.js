@@ -249,14 +249,12 @@ window.onload  = function() {
     body.classList.remove('moveup');
   }
 
-  function blobJob() { //todo add top bottom reqs
-    var blob = null;
+  function blobJob() { // TODO add top bottom reqs and also maybe TODO DELETE ME
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://st-text.herokuapp.com/stranger/trings/print");
+    xhr.open("GET", "https://st-text.herokuapp.com/stranger/things/print");
     xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
-    xhr.onload = function()
-    {
-        blob = xhr.response;//xhr.response is now a blob object
+    xhr.onload = function() {
+        var blob = new Blob([xhr.response],{type: 'image/png'});
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement("a");
         a.href = url;
