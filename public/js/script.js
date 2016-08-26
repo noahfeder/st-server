@@ -1,4 +1,13 @@
 window.onload  = function() {
+  //browser detection! from http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+  var isFirefox = typeof InstallTrigger !== 'undefined';
+  var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  var isEdge = !isIE && !!window.StyleMedia;
+  var isChrome = !!window.chrome && !!window.chrome.webstore;
+  var isBlink = (isChrome || isOpera) && !!window.CSS;
+
   // grabbing global static DOM vars
   var inputs = document.getElementsByTagName('input');
   var button = document.getElementById('blurbutton');
@@ -237,8 +246,14 @@ window.onload  = function() {
   };
 
   function downloader() {
-    var link = document.getElementById('downloadlink');
-    link.setAttribute('href', 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print');
+    // var link = document.getElementById('downloadlink');
+    // link.setAttribute('href', 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print');
+    if (isChrome) {
+      blobJob();
+    } else {
+      loadImg();
+      document.body.classList.add('show');
+    }
   };
 
   function moveUp() {
@@ -247,6 +262,11 @@ window.onload  = function() {
 
   function moveDown() {
     body.classList.remove('moveup');
+  }
+
+  function loadImg() {
+    var img = document.querySelector('.modal img');
+    img.src = 'https://st-text.herokuapp.com/' + inputs[0].value.toLowerCase() + '/' + inputs[1].value.toLowerCase() + '/print';
   }
 
   function blobJob() { // TODO add top bottom reqs and also maybe TODO DELETE ME
@@ -287,7 +307,9 @@ window.onload  = function() {
       spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
     window.onresize = grabCoordinates;
-    download.addEventListener('click',blobJob);
+
+    download.addEventListener('click',downloader);
+
     Array.prototype.forEach.bind(inputs)(function(el){
       el.addEventListener('focus',moveUp);
       el.addEventListener('blur',moveDown);
@@ -296,10 +318,14 @@ window.onload  = function() {
 
   }; //end listenToMe function
 
-
+ if (isIE || isEdge) {
+  window.location.replace("https://www.google.com/chrome/")
+ } else {
   listenToMe();
   grabCoordinates();
   applyAnimations();
+ }
+
 
 
   if (!Modernizr.adownload) {
