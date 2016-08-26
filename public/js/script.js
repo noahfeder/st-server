@@ -246,8 +246,10 @@ window.onload  = function() {
   }
 
   function moveDown(e) {
-    if (e.type === 'blur' && e.relatedTarget.localName === 'button') {
-      e.relatedTarget.click()
+    if (e.relatedTarget) {
+      if (e.relatedTarget.localName === "button") {
+        e.relatedTarget.click();
+      }
     }
     body.classList.remove('moveup');
   }
@@ -269,7 +271,7 @@ window.onload  = function() {
   }
 
   function hideModal(e) {
-    if (body.classList[0] === 'show' && e.target.id !== "downloadbutton") {
+    if (body.classList[0] === 'show' && ( (e.target.id !== "downloadbutton" && e.type === "click") || (e.type === 'keyup' && e.keyCode === 27) ) ) {
       body.classList.remove('show');
     }
   }
@@ -291,6 +293,7 @@ window.onload  = function() {
       }
     });
 
+
     if (inputs[0].value !== "STRANGER" || inputs[1].value !== "THINGS") {
       handleText(inputs[0].value,inputs[0].id);
       handleText(inputs[1].value,inputs[1].id);
@@ -304,12 +307,18 @@ window.onload  = function() {
     download.addEventListener('click',downloader);
 
     Array.prototype.forEach.bind(inputs)(function(el){
-      el.addEventListener('focus',moveUp);
-      el.addEventListener('blur',moveDown);
+      el.addEventListener('focus', moveUp);
+      el.addEventListener('blur', moveDown);
+      el.addEventListener('keyup',function(e) {
+        if (e.keyCode === 27) {
+          moveDown(e);
+        }
+      });
     });
 
     var page = document.querySelector('.words-container');
-    page.addEventListener('click',hideModal)
+    page.addEventListener('click',hideModal);
+    body.addEventListener('keyup',hideModal);
   } //end listenToMe function
 
   if (isIE || isEdge) {
