@@ -246,7 +246,7 @@ window.onload  = function() {
   }
 
   function moveDown(e) {
-    if (e.relatedTarget.localName === 'button') {
+    if (e.type === 'blur' && e.relatedTarget.localName === 'button') {
       e.relatedTarget.click()
     }
     body.classList.remove('moveup');
@@ -283,7 +283,7 @@ window.onload  = function() {
 
     inputs[1].addEventListener('keyup',function(e) {
       if (e.keyCode === 13) {
-        moveDown();
+        moveDown(e);
         handleText(inputs[0].value,inputs[0].id);
         handleText(inputs[1].value,inputs[1].id);
         grabCoordinates();
