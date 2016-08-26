@@ -294,12 +294,12 @@ window.onload  = function() {
     });
 
 
-    if (inputs[0].value !== "STRANGER" || inputs[1].value !== "THINGS") {
+    if (inputs[0].value !== "STRANGER" || inputs[1].value !== "TEXT") {
       handleText(inputs[0].value,inputs[0].id);
       handleText(inputs[1].value,inputs[1].id);
     } else {
       spanifyText('trange', document.querySelector('.middle')); //In lieu of spanning them in HTML template
-      spanifyText('things', document.querySelector('.between')); //In lieu of spanning them in HTML template
+      spanifyText('text', document.querySelector('.between')); //In lieu of spanning them in HTML template
     }
 
     window.onresize = grabCoordinates;
