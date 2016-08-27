@@ -151,6 +151,7 @@ button {
   color: rgba(255,40,0,0.9);
   font-family: ben;
   font-size: 4vw;
+  cursor: pointer;
 }
 
 input {
@@ -265,6 +266,27 @@ input {
   margin: 0 10vw;
   height: auto;
   max-height: 100%;
+}
+
+#socialIcons {
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  margin: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.socialIcon {
+  width: 32px;
+  height: 32px;
+  margin: 0px 4px;
 }
 
 @keyframes blur_resolve{
