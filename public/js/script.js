@@ -319,8 +319,21 @@ window.onload  = function() {
     var page = document.querySelector('.words-container');
     page.addEventListener('click',hideModal);
     body.addEventListener('keyup',hideModal);
+
+    var twitter = document.getElementById('twitter');
+    twitter.addEventListener('click',function() {
+      var top = inputs[0].value.toLowerCase();
+      var bottom = inputs[1].value.toLowerCase();
+      if (top !== 'stranger' || bottom !== 'text') {
+          var url = 'https://twitter.com/intent/tweet?text=I made some text stranger at http://my.funandcool.website/' + top + '/' + bottom + '&hashtags=strangerthings&via=stranger_text';
+          this.href = url;
+      }
+    })
+
   } //end listenToMe function
 
+
+  // Start this party up!
   if (isIE || isEdge) {
     window.location.replace("https://www.google.com/chrome/");
   } else {
@@ -329,6 +342,8 @@ window.onload  = function() {
     applyAnimations();
   }
 
+
+  //safari-only stuff
   function resizer() {
     var resize = new CustomEvent('resize');
     window.dispatchEvent(resize);

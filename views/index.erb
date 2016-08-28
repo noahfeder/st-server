@@ -17,6 +17,7 @@
   <title>Stranger Text - my.funandcool.website</title>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <script src="/js/modernizr-custom.js"></script>
+  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
   <script src="/js/script.js"></script>
   <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -26,9 +27,9 @@
   ga('send', 'pageview');</script>
 </head>
 <body>
-<div style="display: none" id="socialIcons">
-  <img class="socialIcon" src="img/Twitter_Logo_White_On_Image.png">
-  <img class="socialIcon" src="img/FB-f-Logo__white_50.png">
+<div id="socialIcons">
+  <a id="twitter" href="https://twitter.com/intent/tweet?text=I made some text stranger at http://my.funandcool.website&hashtags=strangerthings&via=stranger_text"><img class="socialIcon" src="img/Twitter_Logo_White_On_Image.png"></a>
+  <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fmy.funandcool.website%2F&amp;src=sdkpreparse"><img class="socialIcon" id="facebook" src="img/FB-f-Logo__white_50.png"></a>
 </div>
 <object>
   <svg version="1.1" id="theNotoriousSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg-container blurry_animate" width="100" height="100">
@@ -75,5 +76,13 @@
     <div class="modal-text">Right-click image to save!</div>
     <img src="">
   </div>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>

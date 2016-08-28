@@ -281,6 +281,7 @@ input {
   justify-content: center;
   box-sizing: border-box;
   cursor: pointer;
+  z-index: 69;
 }
 
 .socialIcon {
