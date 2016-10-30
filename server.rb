@@ -71,7 +71,7 @@ end
 get "/:top/:bottom/print" do
   @top = params[:top]
   @bottom = params[:bottom]
-  redirect to("https://phantomjscloud.com/api/browser/v2/#{ENV['KEY']}/?request={url:%22https://st-server.millenialsears.com/#{@top}/#{@bottom}/static%22,renderType:%22png%22,renderSettings:{viewport:{height:400,width:750},clipRectangle:{height:400,width:750,top:0,left:0}}}")
+  redirect to("https://phantomjscloud.com/api/browser/v2/#{ENV['KEY']}/?request={url:%22http://st-server.millenialsears.com/#{@top}/#{@bottom}/static%22,renderType:%22png%22,renderSettings:{viewport:{height:400,width:750},clipRectangle:{height:400,width:750,top:0,left:0}}}")
 end
 
 get "/:top/:bottom" do
